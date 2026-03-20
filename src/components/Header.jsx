@@ -9,13 +9,15 @@ import React, { useState, useEffect } from 'react';
       const [isScrolled, setIsScrolled] = useState(false);
       const { language, toggleLanguage, t } = useLanguage();
 
-      const navItems = [
-        { nameKey: 'navHome', href: '#home' },
-        { nameKey: 'navAbout', href: '#about' },
-        { nameKey: 'navServices', href: '#services' },
-        { nameKey: 'navProjects', href: '#projects' },
-        { nameKey: 'navContact', href: '#contact' },
-      ];
+     const navItems = [
+
+  { nameKey: 'navHome', href: '/#home' },
+  { nameKey: 'navAbout', href: '/#about' },
+  { nameKey: 'navServices', href: '/#services' },
+  { nameKey: 'navProjects', href: '/#projects' },
+  { nameKey: 'navContact', href: '/#contact' },
+  { nameKey: 'navPlayground', href: '/playground' },
+];
 
       useEffect(() => {
         const handleScroll = () => {

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Things to Say & Not Say to E-Learning Designers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="elearning-container">
+    
+    <div id="background-layer">
+        <img id="bg-image" src="img/alex_neutral.jpg" alt="Background" style="display: block;">
+        <video id="bg-video" muted playsinline style="display: none;">
+            <source src="video/Video-personaje.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="overlay-panel">
+        
+        <div id="screen-start" class="screen active">
+            <h1 style="font-size: 2.5em; margin-bottom: 5px; line-height: 1.1;">
+                Things to Say & Not Say<br>
+                <span style="font-size: 0.6em; color: #ffd600;">to E-Learning Designers</span>
+            </h1>
+            <h3 style="margin-top: 0; font-weight: normal; font-style: italic;">
+                (Mission: Survive the Stakeholder)
+            </h3>
+            <p>You are the project manager. You have a kick-off meeting with Alex, your Instructional Designer. Your goal is to request course requirements using the correct "script" without causing him a nervous breakdown.</p>
+            <p><strong>Can you choose the right words?</strong></p>
+            <button id="btn-start" class="action-button">Start Meeting</button>
+        </div>
+
+        <div id="screen-game" class="screen" style="display: none;">
+            <h2 id="question-text">Question goes here...</h2>
+            
+            <div id="options-container" class="respuestas-container">
+                </div>
+
+            <div class="slider-container">
+    <label><strong>Alex's Stress Meter:</strong></label>
+    <div class="custom-gauge-track">
+        <div class="gauge-background"></div>
+        <div id="stress-marker" class="gauge-marker" style="left: 0%;"></div>
+    </div>
+</div>
+        </div>
+
+        <div id="screen-end" class="screen" style="display: none;">
+            <h1 id="end-title">Result</h1>
+            <p id="end-feedback">Your feedback will appear here.</p>
+            <button id="btn-restart" class="action-button">Try Again</button>
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
