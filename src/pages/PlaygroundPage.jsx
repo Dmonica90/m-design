@@ -34,7 +34,7 @@ const PlaygroundPage = () => {
         {
             titleKey: "challenge5Title",
             descKey: "challenge5Desc",
-            thumbnail: "/thumbnails/Museo.png",
+            thumbnail: "/thumbnails/8m-museo.png",
             demoLink: "/challenges/museo-8m/index.html"
         }
 
