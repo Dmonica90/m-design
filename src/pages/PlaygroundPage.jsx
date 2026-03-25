@@ -35,7 +35,7 @@ const PlaygroundPage = () => {
             titleKey: "challenge5Title",
             descKey: "challenge5Desc",
             thumbnail: "/thumbnails/8m-museo.png",
-            demoLink: "/challenges/8m-museo/index.html"
+            demoLink: "/challenges/museo-8m/index.html"
         }
     ];
     return (
