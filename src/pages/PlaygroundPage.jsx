@@ -24,6 +24,12 @@ const PlaygroundPage = () => {
             descKey: "challenge3Desc",
             thumbnail: "public/challenges/survive-stakeholder/img/Survive.png",
             demoLink: "public/challenges/survive-stakeholder/index.html"
+        },
+         {
+            titleKey: "challenge4Title",
+            descKey: "challenge4Desc",
+            thumbnail: "public/challenges/sliding-accordion/slider-accordion.png",
+            demoLink: "public/challenges/sliding-accordion/story.html"
         }
     ];
 

@@ -76,7 +76,10 @@ const translations = {
         
         challenge3Title: 'Mission: Survive the Stakeholder 😅 ',
         challenge3Desc: 'Welcome to Mission: Survive the Stakeholder! In this short interaction, you play as a project manager meeting with Alex, your ID. Your goal is to choose the right things to say to get the project moving without causing his stress meter to max out.',
-  },
+
+        challenge4Title: 'Brand Storytelling Accordion',
+        challenge4Desc: 'A sliding accordion mini-lesson exploring how brands communicate through stories and emotion rather than just hard data.',
+      },
   es: {
     // Header
     navHome: 'Inicio',
@@ -154,6 +157,9 @@ const translations = {
         
         challenge3Title: 'Misión: Sobrevivir al Stakeholder 😅',
         challenge3Desc: '¡Te damos la bienvenida a Misión: Sobrevivir al Stakeholder! En esta breve interacción, juegas como un Project Manager en una reunión con Alex, tu Diseñador Instruccional. Tu objetivo es elegir las palabras correctas para que el proyecto avance sin hacer que su medidor de estrés llegue al máximo.',
+
+        challenge4Title: 'Acordeón: Brand Storytelling',
+        challenge4Desc: 'Una mini-lección interactiva que explora cómo las marcas comunican a través de historias y emociones en lugar de solo datos duros.',
   },
 };
 
