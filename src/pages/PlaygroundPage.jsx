@@ -30,7 +30,15 @@ const PlaygroundPage = () => {
             descKey: "challenge4Desc",
             thumbnail: "/thumbnails/slider-accordion.png",
             demoLink: "/challenges/sliding-accordion/story.html"
+        },
+        
+        {
+            titleKey: "challenge5Title",
+            descKey: "challenge5Desc",
+            thumbnail: "/thumbnails/Museo.png",
+            demoLink: "/challenges/museo-8m/index.html"
         }
+
     ];
 
     return (

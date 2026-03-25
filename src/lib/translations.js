@@ -79,6 +79,9 @@ const translations = {
 
         challenge4Title: 'Brand Storytelling Accordion',
         challenge4Desc: 'A sliding accordion mini-lesson exploring how brands communicate through stories and emotion rather than just hard data.',
+
+        challenge5Title: '8M: Museum of Pioneers',
+        challenge5Desc: 'An interactive virtual museum experience dedicated to International Women\'s Day, exploring the stories, struggles, and legacy of women who changed the world.',
       },
   es: {
     // Header
@@ -160,7 +163,11 @@ const translations = {
 
         challenge4Title: 'Acordeón: Brand Storytelling',
         challenge4Desc: 'Una mini-lección interactiva que explora cómo las marcas comunican a través de historias y emociones en lugar de solo datos duros.',
-  },
+
+        challenge5Title: '8M: Museo de las Pioneras',
+        challenge5Desc: 'Una experiencia interactiva estilo museo virtual dedicada al Día Internacional de la Mujer, explorando las historias y el legado de mujeres que cambiaron el mundo.',
+        
+      },
 };
 
 export default translations;
