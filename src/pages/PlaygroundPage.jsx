@@ -35,11 +35,11 @@ const PlaygroundPage = () => {
             titleKey: "challenge5Title",
             descKey: "challenge5Desc",
             thumbnail: "/thumbnails/8m-museo.png",
-            demoLink: "/challenges/museo-8m/index.html"
+            demoLink: "/challenges/8m-museo/index.html"
         }
 
     ];
-    
+
 
     return (
         // min-h-screen asegura que cubra toda la pantalla, pt-24 da espacio para el menú superior
