@@ -31,7 +31,6 @@ const PlaygroundPage = () => {
             thumbnail: "/thumbnails/slider-accordion.png",
             demoLink: "/challenges/sliding-accordion/story.html"
         },
-        
         {
             titleKey: "challenge5Title",
             descKey: "challenge5Desc",
