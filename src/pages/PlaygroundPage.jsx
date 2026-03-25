@@ -10,26 +10,26 @@ const PlaygroundPage = () => {
         {
             titleKey: "challenge1Title",
             descKey: "challenge1Desc",
-            thumbnail: "public/challenges/operation-dopamine/dopamine.png",
+            thumbnail: "/thumbnails/dopamine.png",
             demoLink: "/challenges/operation-dopamine/story.html"
         },
         {
             titleKey: "challenge2Title",
             descKey: "challenge2Desc",
-            thumbnail: "public/challenges/meet-the-squad/Squad.png",
+            thumbnail: "/thumbnails/Squad.png",
             demoLink: "/challenges/meet-the-squad/story.html"
         },
         {
             titleKey: "challenge3Title",
             descKey: "challenge3Desc",
-            thumbnail: "public/challenges/survive-stakeholder/img/Survive.png",
-            demoLink: "public/challenges/survive-stakeholder/index.html"
+            thumbnail: "/thumbnails/Survive.png",
+            demoLink: "/challenges/survive-stakeholder/index.html"
         },
-         {
+        {
             titleKey: "challenge4Title",
             descKey: "challenge4Desc",
-            thumbnail: "public/challenges/sliding-accordion/slider-accordion.png",
-            demoLink: "public/challenges/sliding-accordion/story.html"
+            thumbnail: "/thumbnails/slider-accordion.png",
+            demoLink: "/challenges/sliding-accordion/story.html"
         }
     ];
 
