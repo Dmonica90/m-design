@@ -39,6 +39,7 @@ const PlaygroundPage = () => {
         }
 
     ];
+    
 
     return (
         // min-h-screen asegura que cubra toda la pantalla, pt-24 da espacio para el menú superior
