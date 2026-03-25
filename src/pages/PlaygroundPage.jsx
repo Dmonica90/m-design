@@ -37,10 +37,7 @@ const PlaygroundPage = () => {
             thumbnail: "/thumbnails/8m-museo.png",
             demoLink: "/challenges/8m-museo/index.html"
         }
-
     ];
-
-
     return (
         // min-h-screen asegura que cubra toda la pantalla, pt-24 da espacio para el menú superior
         <div className="pt-24 min-h-screen flex flex-col">
