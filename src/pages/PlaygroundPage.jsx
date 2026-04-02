@@ -36,6 +36,12 @@ const PlaygroundPage = () => {
             descKey: "challenge5Desc",
             thumbnail: "/thumbnails/8m-museo.png",
             demoLink: "/challenges/museo-8m/index.html"
+        },
+        {
+            titleKey: "challenge6Title",
+            descKey: "challenge6Desc",
+            thumbnail: "/thumbnails/mangrove-blur.png",
+            demoLink: "/challenges/mangrove-blur/story.html"
         }
     ];
     return (

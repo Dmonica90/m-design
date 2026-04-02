@@ -82,6 +82,9 @@ const translations = {
 
         challenge5Title: '8M: Museum of Pioneers',
         challenge5Desc: 'An interactive virtual museum experience dedicated to International Women\'s Day, exploring the stories, struggles, and legacy of women who changed the world.',
+
+        challenge6Title: 'Mangrove Blur: The Climate Shield 🌿',
+        challenge6Desc: 'Discover the hidden power of mangroves in this interactive discovery challenge. Uncover how these "blue carbon" champions capture CO2 and protect our planet, revealing the knowledge one layer at a time.',
       },
   es: {
     // Header
@@ -167,6 +170,9 @@ const translations = {
         challenge5Title: '8M: Museo de las Pioneras',
         challenge5Desc: 'Una experiencia interactiva estilo museo virtual dedicada al Día Internacional de la Mujer, explorando las historias y el legado de mujeres que cambiaron el mundo.',
         
+        challenge6Title: 'Manglares Deslumbrantes: El Escudo Climático 🌿',
+        challenge6Desc: 'Descubre el poder oculto de los manglares en este desafío interactivo. Averigua cómo estos campeones del "carbono azul" capturan CO2 y protegen nuestro planeta, revelando el conocimiento capa a capa.',
+
       },
 };
 
