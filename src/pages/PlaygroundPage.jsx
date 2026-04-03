@@ -29,7 +29,7 @@ const PlaygroundPage = () => {
             titleKey: "challenge4Title",
             descKey: "challenge4Desc",
             thumbnail: "/thumbnails/slider-accordion.png",
-            demoLink: "/acordion"
+            demoLink: "/accordion"
         },
         {
             titleKey: "challenge5Title",
