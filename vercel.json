@@ -2,19 +2,19 @@
   "rewrites": [
     {
       "source": "/squad",
-      "destination": "/challenges/meet-the-squad/story.html"
+      "destination": "/challenges/meet-the-squad/index.html"
     },
     {
       "source": "/dopamine",
-      "destination": "/challenges/operation-dopamine/story.html"
+      "destination": "/challenges/operation-dopamine/index.html"
     },
     {
       "source": "/acordion",
-      "destination": "/challenges/sliding-accordion/story.html"
+      "destination": "/challenges/sliding-accordion/index.html"
     },
     {
       "source": "/survive-stakeholder",
-      "destination": "/challenges/survive-stakeholder/story.html"
+      "destination": "/challenges/survive-stakeholder/index.html"
     },
     {
       "source": "/museo-8m",
@@ -22,7 +22,7 @@
     },
     {
       "source": "/mangrove",
-     "destination": "/challenges/mangrove-blur/story.html"
+     "destination": "/challenges/mangrove-blur/index.html"
     },
     {
       "source": "/(.*)",
