@@ -11,37 +11,37 @@ const PlaygroundPage = () => {
             titleKey: "challenge1Title",
             descKey: "challenge1Desc",
             thumbnail: "/thumbnails/dopamine.png",
-            demoLink: "/dopamine"
+            demoLink: "/dopamine/"
         },
         {
             titleKey: "challenge2Title",
             descKey: "challenge2Desc",
             thumbnail: "/thumbnails/Squad.png",
-            demoLink: "/squad"
+            demoLink: "/squad/"
         },
         {
             titleKey: "challenge3Title",
             descKey: "challenge3Desc",
             thumbnail: "/thumbnails/Survive.png",
-            demoLink: "/survive-stakeholder"
+            demoLink: "/survive-stakeholder/"
         },
         {
             titleKey: "challenge4Title",
             descKey: "challenge4Desc",
             thumbnail: "/thumbnails/slider-accordion.png",
-            demoLink: "/accordion"
+            demoLink: "/accordion/"
         },
         {
             titleKey: "challenge5Title",
             descKey: "challenge5Desc",
             thumbnail: "/thumbnails/8m-museo.png",
-            demoLink: "/museo-8m"
+            demoLink: "/museo-8m/"
         },
         {
             titleKey: "challenge6Title",
             descKey: "challenge6Desc",
             thumbnail: "/thumbnails/mangrove-blur.png",
-            demoLink: "/mangrove"
+            demoLink: "/mangrove/"
         }
     ];
     return (
