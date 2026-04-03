@@ -1,27 +1,27 @@
 {
   "rewrites": [
     {
-      "source": "/squad",
+      "source": "/squad/",
       "destination": "/meet-the-squad/index.html"
     },
     {
-      "source": "/dopamine",
+      "source": "/dopamine/",
       "destination": "/operation-dopamine/index.html"
     },
     {
-      "source": "/accordion",
+      "source": "/accordion/",
       "destination": "/sliding-accordion/index.html"
     },
     {
-      "source": "/survive-stakeholder",
+      "source": "/survive-stakeholder/",
       "destination": "/survive-stakeholder/index.html"
     },
     {
-      "source": "/museo-8m",
+      "source": "/museo-8m/",
       "destination": "/museo-8m/index.html"
     },
     {
-      "source": "/mangrove",
+      "source": "/mangrove/",
      "destination": "/mangrove-blur/index.html"
     },
     {
