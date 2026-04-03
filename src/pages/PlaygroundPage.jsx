@@ -11,37 +11,37 @@ const PlaygroundPage = () => {
             titleKey: "challenge1Title",
             descKey: "challenge1Desc",
             thumbnail: "/thumbnails/dopamine.png",
-            demoLink: "/dopamine/"
+            demoLink: "/challenges/operation-dopamine/story.html" // Ruta larga y segura
         },
         {
             titleKey: "challenge2Title",
             descKey: "challenge2Desc",
             thumbnail: "/thumbnails/Squad.png",
-            demoLink: "/squad/"
+            demoLink: "/challenges/meet-the-squad/story.html" // Ruta larga y segura
         },
         {
             titleKey: "challenge3Title",
             descKey: "challenge3Desc",
             thumbnail: "/thumbnails/Survive.png",
-            demoLink: "/survive-stakeholder/"
+            demoLink: "/challenges/survive-stakeholder/index.html" // O story.html según tu carpeta original
         },
         {
             titleKey: "challenge4Title",
             descKey: "challenge4Desc",
             thumbnail: "/thumbnails/slider-accordion.png",
-            demoLink: "/accordion/"
+            demoLink: "/challenges/sliding-accordion/story.html" // Ruta larga y segura
         },
         {
             titleKey: "challenge5Title",
             descKey: "challenge5Desc",
             thumbnail: "/thumbnails/8m-museo.png",
-            demoLink: "/museo-8m/"
+            demoLink: "/challenges/museo-8m/index.html" // Ruta larga y segura
         },
         {
             titleKey: "challenge6Title",
             descKey: "challenge6Desc",
             thumbnail: "/thumbnails/mangrove-blur.png",
-            demoLink: "/mangrove/"
+            demoLink: "/challenges/mangrove-blur/story.html" // Ruta larga y segura
         }
     ];
     return (
