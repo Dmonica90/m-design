@@ -41,7 +41,7 @@ const PlaygroundPage = () => {
             titleKey: "challenge6Title",
             descKey: "challenge6Desc",
             thumbnail: "/thumbnails/mangrove-blur.png",
-            demoLink: "/challenges/mangrove-blur/story.html"
+            demoLink: "/challenges/Mangrove-blur/story.html"
         }
     ];
     return (

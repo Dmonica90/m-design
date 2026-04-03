@@ -22,7 +22,7 @@
     },
     {
       "source": "/mangrove",
-     "destination": "/challenges/mangrove-blur/story.html"
+     "destination": "/challenges/Mangrove-blur/story.html"
     },
     {
       "source": "/(.*)",
