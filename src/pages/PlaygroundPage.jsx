@@ -42,6 +42,12 @@ const PlaygroundPage = () => {
             descKey: "challenge6Desc",
             thumbnail: "/thumbnails/mangrove-blur.png",
             demoLink: "/challenge/mangrove-blur/story.html" // Ruta larga y segura
+        },
+        {
+            titleKey: "challenge7Title",
+            descKey: "challenge7Desc",
+            thumbnail: "/thumbnails/playcraft-assistant.png", // Asegúrate de guardar la imagen con este nombre
+            demoLink: "/challenges/playcraft-assistant/story.html" // Ruta larga y segura
         }
     ];
     return (

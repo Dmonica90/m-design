@@ -29,6 +29,11 @@
       "source": "/mangrove",
       "destination": "/challenge/mangrove-blur/story.html",
       "permanent": false
+    },
+    {
+      "source": "/playcraft",
+      "destination": "/challenges/playcraft-assistant/story.html",
+      "permanent": false
     }
   ],
   "rewrites": [

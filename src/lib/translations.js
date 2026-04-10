@@ -85,6 +85,9 @@ const translations = {
 
         challenge6Title: 'Mangrove Blur: The Climate Shield 🌿',
         challenge6Desc: 'Discover the hidden power of mangroves in this interactive discovery challenge. Uncover how these "blue carbon" champions capture CO2 and protect our planet, revealing the knowledge one layer at a time.',
+
+        challenge7Title: 'Playcraft Assistant: 3D & Storyline',
+        challenge7Desc: 'An advanced technical experiment bridging Articulate Storyline and Spline 3D. Using custom JS and the postMessage API, native Storyline triggers control a live 3D robot in real-time, featuring a GSAP-powered terminal UI.'
       },
   es: {
     // Header
@@ -173,7 +176,9 @@ const translations = {
         challenge6Title: 'Manglares Deslumbrantes: El Escudo Climático 🌿',
         challenge6Desc: 'Descubre el poder oculto de los manglares en este desafío interactivo. Averigua cómo estos campeones del "carbono azul" capturan CO2 y protegen nuestro planeta, revelando el conocimiento capa a capa.',
 
-      },
+        challenge7Title: 'Playcraft Assistant: 3D & Storyline',
+        challenge7Desc: 'Un experimento técnico avanzado que conecta Articulate Storyline y Spline 3D. Usando JS y la API postMessage, los botones nativos controlan un robot 3D en tiempo real, con una interfaz de terminal animada con GSAP.'
+    },
 };
 
 export default translations;
