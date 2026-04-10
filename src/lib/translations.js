@@ -55,7 +55,7 @@ const translations = {
     contactSubtitle: 'Ready to transform your corporate training? Reach out!',
     contactParagraph: "If you want to transform your corporate training with gamification and interactive content, I'd love to hear from you.",
     contactWhatsApp: 'WhatsApp: +52 563 186 4638',
-    contactEmail: 'Email: dominica.vrl@gmail.com',
+    contactEmail: 'Email: dmonica.vrl@gmail.com',
     contactLinkedIn: "Let's connect on LinkedIn! 🤝",
 
     // Footer
@@ -145,7 +145,7 @@ const translations = {
     contactSubtitle: '¿Listo para transformar tu capacitación corporativa? ¡Contáctame!',
     contactParagraph: 'Si quieres transformar tu capacitación corporativa con gamificación y contenido interactivo, me encantaría saber de ti.',
     contactWhatsApp: 'WhatsApp: +52 563 186 4638',
-    contactEmail: 'Email: dominica.vrl@gmail.com',
+    contactEmail: 'Email: dmonica.vrl@gmail.com',
     contactLinkedIn: '¡Conectemos en LinkedIn! 🤝',
 
     // Footer

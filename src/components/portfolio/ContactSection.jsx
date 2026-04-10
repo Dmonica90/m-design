@@ -31,7 +31,7 @@ const ContactSection = ({ t }) => {
 
             {/* 3. Botón de Email */}
             <Button variant="outline" size="lg" className="w-full border-primary text-primary hover:bg-primary/10" asChild>
-              <a href="mailto:dominica.vrl@gmail.com">
+              <a href="mailto:dmonica.vrl@gmail.com">
                 <Mail className="mr-2 h-5 w-5" />
                 {t('contactEmail')}
               </a>
