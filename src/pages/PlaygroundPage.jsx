@@ -46,8 +46,8 @@ const PlaygroundPage = () => {
         {
             titleKey: "challenge7Title",
             descKey: "challenge7Desc",
-            thumbnail: "/thumbnails/playcraft-assistant.png", // Asegúrate de guardar la imagen con este nombre
-            demoLink: "/challenges/playcraft-assistant/story.html" // Ruta larga y segura
+            thumbnail: "/thumbnails/playcraft-assistant.png", 
+            demoLink: "/challenge/playcraft-assistant/story.html" 
         }
     ];
     return (
