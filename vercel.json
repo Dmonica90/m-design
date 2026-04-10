@@ -2,32 +2,32 @@
   "redirects": [
     {
       "source": "/squad",
-      "destination": "/challenge/meet-the-squad/story.html",
+      "destination": "/challenges/meet-the-squad/story.html",
       "permanent": false
     },
     {
       "source": "/dopamine",
-      "destination": "/challenge/operation-dopamine/story.html",
+      "destination": "/challenges/operation-dopamine/story.html",
       "permanent": false
     },
     {
       "source": "/accordion",
-      "destination": "/challenge/sliding-accordion/story.html",
+      "destination": "/challenges/sliding-accordion/story.html",
       "permanent": false
     },
     {
       "source": "/survive-stakeholder",
-      "destination": "/challenge/survive-stakeholder/index.html",
+      "destination": "/challenges/survive-stakeholder/index.html",
       "permanent": false  
     },
     {
       "source": "/museo-8m",
-      "destination": "/challenge/museo-8m/index.html",  
+      "destination": "/challenges/museo-8m/index.html",  
       "permanent": false
     },
     {
       "source": "/mangrove",
-      "destination": "/challenge/mangrove-blur/story.html",
+      "destination": "/challenges/mangrove-blur/story.html",
       "permanent": false
     },
     {
