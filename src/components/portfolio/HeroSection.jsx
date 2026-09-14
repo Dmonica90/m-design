@@ -5,7 +5,7 @@ import React from 'react';
 
     const HeroSection = ({ t, userImageURL }) => {
       return (
-        <section id="home" className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden pt-20 bg-gradient-to-br from-sky-100 via-pink-50 to-rose-100">
+        <section id="home" className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden pt-20 bg-gradient-to-br from-primary/10 via-secondary/10 to-tertiary/10">
           <div className="absolute inset-0 opacity-30">
             <motion.div 
               className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/30 rounded-full filter blur-xl"
@@ -28,7 +28,7 @@ import React from 'react';
               <img 
                 src={userImageURL} 
                 alt={t('heroName')}
-                className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover shadow-xl border-4 border-white"
+                className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover shadow-xl border-4 border-card"
               />
             </motion.div>
             <motion.h1
@@ -40,7 +40,7 @@ import React from 'react';
               {t('heroName')}
             </motion.h1>
             <motion.p
-              className="text-xl sm:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto"
+              className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
@@ -52,7 +52,7 @@ import React from 'react';
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <Button size="lg" asChild className="bg-gradient-to-r from-primary to-pink-500 hover:from-primary/90 hover:to-pink-500/90 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+              <Button size="lg" asChild className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
                 <a href="#contact">{t('heroCta')} <ArrowRight className="ml-2 h-5 w-5" /></a>
               </Button>
             </motion.div>

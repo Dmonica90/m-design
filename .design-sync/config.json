@@ -1,0 +1,92 @@
+{
+  "pkg": "web-app",
+  "globalName": "MDesign",
+  "shape": "package",
+  "buildCmd": "npm run build:ds",
+  "srcDir": "src/design-system",
+  "cssEntry": "dist-ds/design-system.css",
+  "tokensGlob": "src/design-system/styles/tokens.css",
+  "componentSrcMap": {
+    "CardHeader": "src/design-system/primitives/Card.jsx",
+    "CardTitle": "src/design-system/primitives/Card.jsx",
+    "CardDescription": "src/design-system/primitives/Card.jsx",
+    "CardContent": "src/design-system/primitives/Card.jsx",
+    "CardFooter": "src/design-system/primitives/Card.jsx",
+    "ToastAction": "src/design-system/feedback/Toast.jsx",
+    "ToastClose": "src/design-system/feedback/Toast.jsx",
+    "ToastDescription": "src/design-system/feedback/Toast.jsx",
+    "ToastProvider": "src/design-system/feedback/Toast.jsx",
+    "ToastTitle": "src/design-system/feedback/Toast.jsx",
+    "ToastViewport": "src/design-system/feedback/Toast.jsx",
+    "NumberedListItem": "src/design-system/primitives/NumberedList.jsx"
+  },
+  "overrides": {
+    "SiteHeader": {
+      "cardMode": "single",
+      "primaryStory": "Solid",
+      "viewport": "1000x420"
+    },
+    "ImageLightbox": {
+      "cardMode": "single",
+      "primaryStory": "Open",
+      "viewport": "900x600"
+    },
+    "SectionWrapper": {
+      "cardMode": "column"
+    },
+    "Toast": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "760x260"
+    },
+    "ToastAction": {
+      "cardMode": "single",
+      "primaryStory": "Undo",
+      "viewport": "760x260"
+    },
+    "ToastClose": {
+      "cardMode": "single",
+      "primaryStory": "Revealed",
+      "viewport": "760x260"
+    },
+    "ToastDescription": {
+      "cardMode": "single",
+      "primaryStory": "UnderATitle",
+      "viewport": "760x260"
+    },
+    "ToastProvider": {
+      "cardMode": "single",
+      "primaryStory": "FullComposition",
+      "viewport": "760x280"
+    },
+    "ToastTitle": {
+      "cardMode": "single",
+      "primaryStory": "WithDescription",
+      "viewport": "760x260"
+    },
+    "ToastViewport": {
+      "cardMode": "single",
+      "primaryStory": "StackedToasts",
+      "viewport": "760x360"
+    },
+    "Toaster": {
+      "cardMode": "single",
+      "primaryStory": "WithAToast",
+      "viewport": "900x400"
+    },
+    "Statement": {
+      "cardMode": "single",
+      "primaryStory": "ChapterOpener",
+      "viewport": "1000x520"
+    },
+    "Eyebrow": {
+      "cardMode": "column"
+    },
+    "FeatureCard": {
+      "cardMode": "column"
+    },
+    "Heading": {
+      "cardMode": "column"
+    }
+  }
+}
