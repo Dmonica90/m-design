@@ -6,15 +6,10 @@ import { Mail, Linkedin } from 'lucide-react'; // <--- Importamos Linkedin aquí
 
 const ContactSection = ({ t }) => {
   return (
-    <SectionWrapper
-      id="contact"
-      number="04"
-      title={t('contactTitle')}
-      subtitle={t('contactSubtitle')}
-    >
-      <Card tone="secondary" className="max-w-lg mx-auto p-6 sm:p-8">
+    <SectionWrapper id="contact" title={t('contactTitle')} subtitle={t('contactSubtitle')}>
+      <Card className="max-w-lg mx-auto shadow-xl bg-gradient-to-br from-primary/10 to-secondary/10 p-6 sm:p-8">
         <CardContent className="text-center space-y-6">
-          <p className="text-muted-foreground leading-relaxed">{t('contactParagraph')}</p>
+          <p className="text-slate-600 leading-relaxed">{t('contactParagraph')}</p>
           <div className="space-y-4">
             
             {/* 1. Botón de WhatsApp */}

@@ -1,12 +1,13 @@
 // Tailwind config for the design system's shippable stylesheet.
 //
-// Same theme as tailwind.config.js. Two differences, both deliberate:
+// The design system is self-contained: it borrows the app's base theme but owns
+// everything specific to itself, so tailwind.config.js — which belongs to the
+// portfolio site — stays untouched.
 //
-//  1. `content` scans the whole app, not just src/design-system. The portfolio
-//     is the design system's own reference implementation — every utility it
-//     uses is part of the vocabulary, so shipping those keeps real page
-//     compositions rendering correctly.
-//  2. `safelist` guarantees a baseline layout vocabulary even when no source
+//  1. `content` scans ONLY src/design-system. The app has its own palette and
+//     its classes must not leak into the shipped stylesheet.
+//  2. `colors` adds the brand families the design system introduces.
+//  3. `safelist` guarantees a baseline layout vocabulary even when no source
 //     file happens to use it. Consumers of this stylesheet (the claude.ai/design
 //     agent, and the preview cards) write their own layout glue; without a
 //     safelist, a `gap-6` they reach for simply would not exist in the CSS and
@@ -17,12 +18,30 @@ const RESPONSIVE = ['responsive'];
 
 module.exports = {
 	...appConfig,
-	// Only real source is scanned. Preview files under .design-sync/ are
+	// Only the design system's own source. Preview files under .design-sync/ are
 	// deliberately NOT listed: Tailwind's scanner skips dot-directories, so the
 	// glob would silently do nothing — and preview code should not shape the
 	// shipped stylesheet anyway. Previews stick to safelisted utilities or use
 	// inline styles (see .design-sync/NOTES.md).
-	content: ['./src/**/*.{js,jsx}'],
+	content: ['./src/design-system/**/*.{js,jsx}'],
+	theme: {
+		...appConfig.theme,
+		extend: {
+			...appConfig.theme.extend,
+			fontFamily: { sans: ['var(--font-sans)'] },
+			colors: {
+				...appConfig.theme.extend.colors,
+				tertiary: {
+					DEFAULT: 'hsl(var(--tertiary))',
+					foreground: 'hsl(var(--tertiary-foreground))',
+				},
+				'surface-deep': {
+					DEFAULT: 'hsl(var(--surface-deep))',
+					foreground: 'hsl(var(--surface-deep-foreground))',
+				},
+			},
+		},
+	},
 	safelist: [
 		// --- display + flexbox/grid structure ---------------------------------
 		{ pattern: /^(flex|inline-flex|grid|inline-grid|block|inline-block|inline|hidden|contents)$/, variants: RESPONSIVE },

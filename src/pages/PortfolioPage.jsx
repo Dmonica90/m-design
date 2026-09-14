@@ -25,7 +25,7 @@ import React, { useState } from 'react';
         }),
       };
 
-      const paragraphStyle = "mb-4 p-4 rounded-lg bg-card/50 backdrop-blur-sm shadow-sm text-muted-foreground leading-relaxed";
+      const paragraphStyle = "mb-4 p-4 rounded-lg bg-white/50 backdrop-blur-sm shadow-sm text-slate-700 leading-relaxed";
 
       const whatIDoImages = [
         { src: "https://storage.googleapis.com/hostinger-horizons-assets-prod/3913c9f8-cff2-4084-a914-b4e290044ff2/2beddbcc6b428e859084a99bdee2fd7d.jpg", alt: "Elearning module with a robot guide and map interface" },

@@ -16,9 +16,6 @@ module.exports = {
 			},
 		},
 		extend: {
-			fontFamily: {
-				sans: ['var(--font-sans)'],
-			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -32,14 +29,6 @@ module.exports = {
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))',
-				},
-				tertiary: {
-					DEFAULT: 'hsl(var(--tertiary))',
-					foreground: 'hsl(var(--tertiary-foreground))',
-				},
-				'surface-deep': {
-					DEFAULT: 'hsl(var(--surface-deep))',
-					foreground: 'hsl(var(--surface-deep-foreground))',
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',

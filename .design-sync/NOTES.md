@@ -13,9 +13,16 @@ Repo-specific gotchas a future sync should know before touching anything.
   `public/` (the challenge games, ~100 files) into `dist-ds/`.
 - `package.json` carries `module`/`types` pointing at `dist-ds/` purely so the
   converter can resolve the entry and the `.d.ts`. Vite ignores them for the app.
-- The app consumes the design system: `src/components/ui/*` and
-  `src/lib/utils.js` are thin re-export shims, and `Header`/`Footer` are app-level
-  wrappers that feed translated copy into the context-free `SiteHeader`/`SiteFooter`.
+- **The app does NOT consume the design system, deliberately.** The portfolio is
+  left exactly as it was; the design system is a separate deliverable that keeps
+  its own copies of the components it was extracted from. `grep -rn "@/design-system" src/`
+  outside `src/design-system/` should return nothing, and the design system
+  imports nothing from the app — the two are independent by design.
+  The consequence to accept: the two sets of components can drift. If the app is
+  ever migrated onto the system, that is a separate, deliberate piece of work.
+- **`tailwind.config.js` belongs to the app and must stay untouched.** The design
+  system's theme additions (`tertiary`, `surface-deep`, `--font-sans`) live in
+  `tailwind.ds.config.js`, which borrows the app's base theme and extends it.
 
 ## The stylesheet safelist is load-bearing
 
@@ -24,8 +31,11 @@ Rendered designs receive only `styles.css` and its import closure, so a utility 
 design agent reaches for that is not in that file silently renders unstyled. Two
 bugs found this way:
 
-- Scanning only `src/design-system/**` produced a 20 KB stylesheet with no `gap-6`,
-  `grid-cols-2` or `max-w-md`. Preview grids collapsed into flush single columns.
+- With no safelist, scanning only `src/design-system/**` produced a 20 KB
+  stylesheet with no `gap-6`, `grid-cols-2` or `max-w-md`. Preview grids collapsed
+  into flush single columns. The safelist is what makes it safe for `content` to
+  scan the design system alone — which it now does, so the app's own off-palette
+  classes never leak into the shipped stylesheet.
 - Token colours at partial opacity (`bg-primary/10`) are separate classes from the
   solid ones and were missing too — `bg-primary/10` panels rendered transparent.
   The alpha steps are deliberately limited to `5|10|20|50|80|90`; the full
@@ -86,11 +96,16 @@ this is preview-only scaffolding and changes nothing about the components.
 - `Toast.jsx`: the `red-*` classes on the destructive close button belong with
   `--destructive`.
 
-## Two files that must stay in step
+## Verifying the two stay separate
 
-`.gradient-background` is defined **twice** — in `src/index.css` (the app) and in
-`src/design-system/styles/design-system.css` (the shipped stylesheet). Change one,
-change the other, or the site and the design system drift apart.
+Two cheap checks that the boundary still holds:
+
+- `grep -rn "@/design-system" src/ --include=*.jsx --include=*.js | grep -v "^src/design-system/"`
+  must be empty — the app must not import the system.
+- `grep -rn "from '@/" src/design-system/` must be empty — the system must not
+  import the app.
+- `grep -c "text-slate-600\|bg-sky-100" dist-ds/design-system.css` must be 0 — the
+  app's palette must not leak into the shipped stylesheet.
 
 ## Re-sync risks
 
@@ -104,9 +119,12 @@ change the other, or the site and the design system drift apart.
 - **Grades do not follow the palette.** The converter treats styling as pipeline
   churn, so a colour change carries old grades forward unchanged. Any future
   repalette must `package-capture.mjs --force` and regrade from fresh sheets.
-- **The site's own recomposition is partial.** `HeroSection` and `PlaygroundSection`
-  keep their original composition; only their colours were swept. The other four
-  sections were rebuilt on `Eyebrow`/`FeatureCard`/`NumberedList`.
+- **The app was deliberately reverted.** An earlier pass repaletted the portfolio
+  and recomposed four of its sections onto the new components; that was rolled
+  back at the user's request, because the deliverable is the design system and the
+  site was to be left alone. The components are proven to compose (the previews
+  render them), but no page in this repo consumes them — so a future migration has
+  no working reference in-tree beyond `.design-sync/previews/`.
 - **`npm run lint` is broken on `main`**, before any of this work: the `globals`
   package trips ESLint with `Global "AudioWorkletGlobalScope " has leading or
   trailing whitespace`. Unrelated to the design system; verified by stashing.
