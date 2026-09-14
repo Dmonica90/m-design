@@ -64,7 +64,7 @@ const SiteHeader = ({
 				<div className="flex items-center justify-between h-20">
 					<a
 						href={brandHref}
-						className="text-2xl font-bold text-primary hover:text-primary/80 transition-colors"
+						className="text-2xl font-bold text-foreground hover:text-secondary transition-colors"
 					>
 						{brand}
 					</a>

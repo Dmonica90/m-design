@@ -1,7 +1,36 @@
 import { Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from 'web-app';
 
+export const Tones = () => (
+  <div className="grid sm:grid-cols-2 gap-6 max-w-3xl">
+    <Card tone="primary">
+      <CardHeader>
+        <CardTitle>Primary</CardTitle>
+        <CardDescription>Azul claro, el tono de base.</CardDescription>
+      </CardHeader>
+    </Card>
+    <Card tone="secondary">
+      <CardHeader>
+        <CardTitle>Secondary</CardTitle>
+        <CardDescription>Magenta, para lo que debe destacar.</CardDescription>
+      </CardHeader>
+    </Card>
+    <Card tone="tertiary">
+      <CardHeader>
+        <CardTitle>Tertiary</CardTitle>
+        <CardDescription>Azul profundo.</CardDescription>
+      </CardHeader>
+    </Card>
+    <Card tone="plain">
+      <CardHeader>
+        <CardTitle>Plain</CardTitle>
+        <CardDescription>Blanca, con filete — nunca invisible.</CardDescription>
+      </CardHeader>
+    </Card>
+  </div>
+);
+
 export const Basic = () => (
-  <Card className="max-w-md">
+  <Card tone="primary" className="max-w-md">
     <CardHeader>
       <CardTitle>Gamified safety onboarding</CardTitle>
       <CardDescription>Six modules for warehouse field technicians.</CardDescription>
@@ -16,7 +45,7 @@ export const Basic = () => (
 );
 
 export const WithFooter = () => (
-  <Card className="max-w-md">
+  <Card tone="secondary" className="max-w-md">
     <CardHeader>
       <CardTitle>Museo 8M</CardTitle>
       <CardDescription>A side-scrolling museum about women in computing.</CardDescription>
@@ -38,7 +67,7 @@ export const WithFooter = () => (
 
 export const Grid = () => (
   <div className="grid sm:grid-cols-2 gap-6">
-    <Card>
+    <Card tone="primary">
       <CardHeader>
         <CardTitle className="text-xl">Instructional design</CardTitle>
       </CardHeader>
@@ -48,7 +77,7 @@ export const Grid = () => (
         </p>
       </CardContent>
     </Card>
-    <Card>
+    <Card tone="tertiary">
       <CardHeader>
         <CardTitle className="text-xl">Interactive build</CardTitle>
       </CardHeader>

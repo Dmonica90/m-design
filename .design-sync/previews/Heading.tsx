@@ -11,14 +11,33 @@ export const Levels = () => (
 
 export const Tones = () => (
   <div className="space-y-6">
-    <Heading level={3} tone="primary">
-      Brand blue — the default
-    </Heading>
     <Heading level={3} tone="foreground">
-      Foreground — for dense pages
+      Foreground — the default
+    </Heading>
+    <Heading level={3} tone="primary">
+      Primary — light blue
+    </Heading>
+    <Heading level={3} tone="secondary">
+      Secondary — magenta, for a whole accented line
+    </Heading>
+    <Heading level={3} tone="tertiary">
+      Tertiary — deep blue
     </Heading>
     <Heading level={3} tone="muted">
       Muted — for quiet section labels
+    </Heading>
+  </div>
+);
+
+export const AccentWord = () => (
+  <div className="max-w-2xl space-y-6">
+    <Heading level={2}>
+      Stop designing courses.{' '}
+      <span className="text-secondary">Start crafting experiences.</span>
+    </Heading>
+    <Heading level={3}>
+      La tecnología sirve a lo que{' '}
+      <span className="text-secondary">diseñamos.</span>
     </Heading>
   </div>
 );

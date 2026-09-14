@@ -32,7 +32,7 @@ export const WithSharedDuration = () => (
         <div className="grid gap-1">
           <ToastTitle>Ten second default</ToastTitle>
           <ToastDescription>
-            `duration` on the provider sets the default for every toast inside it.
+            The provider's duration prop sets the default for every toast inside it.
           </ToastDescription>
         </div>
         <ToastClose />

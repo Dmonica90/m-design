@@ -1,10 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle, SectionWrapper } from 'web-app';
 
-export const WithTitleAndSubtitle = () => (
+export const Numbered = () => (
   <SectionWrapper
     id="services"
-    title="What I do"
-    subtitle="Interactive learning, from the first storyboard to the SCORM package."
+    number="02"
+    eyebrow="Qué hago"
+    title={<>Interactive learning, <span className="text-secondary">end to end.</span></>}
+    subtitle="From the first storyboard to the SCORM package."
   >
     <div className="grid sm:grid-cols-2 gap-8">
       <Card>

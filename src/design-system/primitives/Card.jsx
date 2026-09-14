@@ -17,16 +17,23 @@ const cardVariants = cva('rounded-lg transition-shadow', {
 			outlined: 'border border-border',
 		},
 	},
+	// A plain card is white, so on a white surface a flat one has no edge at all
+	// and renders invisible. Tinted cards carry their own edge through the wash;
+	// plain flat ones get a hairline so the default <Card /> is always visible.
+	compoundVariants: [
+		{ tone: 'plain', elevation: 'flat', class: 'border border-border' },
+	],
 	defaultVariants: { tone: 'plain', elevation: 'flat' },
 });
 
 /**
  * A surface that groups related content.
  *
- * m-design cards are **flat and tinted** by default — a wash of a brand colour
- * with no border and no shadow. That is the system's dominant surface
- * treatment; reach for `elevation="raised"` only when a card genuinely floats
- * above the page, such as a modal-like panel.
+ * m-design cards are **flat** — the system's dominant surface treatment is a
+ * wash of a brand colour with no shadow. Set `tone` to tint one; a `plain` card
+ * stays white and picks up a hairline border instead, so it is never invisible
+ * against a white surface. Reach for `elevation="raised"` only when a card
+ * genuinely floats above the page, such as a modal-like panel.
  *
  * `Card` is a compound component: compose it from `CardHeader`, `CardTitle`,
  * `CardDescription`, `CardContent` and `CardFooter` rather than hand-rolling
