@@ -3,9 +3,12 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
+  "module": "./dist-ds/index.es.js",
+  "types": "./dist-ds/index.d.ts",
   "scripts": {
     "dev": "vite --host :: --port 3000",
     "build": "node tools/generate-llms.js || true && vite build",
+    "build:ds": "vite build --config vite.config.ds.js && tailwindcss -c tailwind.ds.config.js -i src/design-system/styles/design-system.css -o dist-ds/design-system.css --minify && cp src/design-system/index.d.ts dist-ds/index.d.ts",
     "preview": "vite preview --host :: --port 3000",
     "lint": "eslint . --quiet"
   },

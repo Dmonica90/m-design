@@ -1,0 +1,100 @@
+/**
+ * m-design tokens — the single source of truth for the design language.
+ *
+ * The palette is PLAYCRAFT's: off-white ground, near-black ink, and three brand
+ * colours — light blue, magenta, deep blue — plus a navy surface for the
+ * immersive dark sections.
+ *
+ * Every colour is stored as bare HSL channels (`H S% L%`) so Tailwind can wrap
+ * them in `hsl(var(--token) / <alpha>)` and opacity modifiers such as
+ * `bg-primary/10` keep working. Never store a finished `hsl(...)` string here.
+ *
+ * Consumed by tailwind.config.js, which maps each token to a utility family
+ * (`--primary` -> `bg-primary`, `text-primary`, `border-primary`, `ring-primary`).
+ */
+
+:root {
+  /* --- Surfaces ------------------------------------------------------- */
+  --background: 0 0% 97%; /* #F7F7F7 — the page ground */
+  --foreground: 0 0% 5%; /* #0D0D0D — default ink */
+
+  --card: 0 0% 100%; /* plain raised surface */
+  --card-foreground: 0 0% 5%;
+
+  --popover: 0 0% 100%; /* floating surface */
+  --popover-foreground: 0 0% 5%;
+
+  /* Navy ground for statement and chapter-opener sections. Derived from the
+     deep blue below; it is the one value outside the five brand swatches. */
+  --surface-deep: 230 60% 10%;
+  --surface-deep-foreground: 0 0% 100%;
+
+  /* --- Brand ---------------------------------------------------------- */
+  --primary: 203 89% 55%; /* #29A5F2 — light blue, the lead colour */
+  --primary-foreground: 0 0% 5%; /* near-black: 7.2:1. White on this blue is 2.7:1 and fails AA. */
+
+  --secondary: 316 96% 43%; /* #D904A0 — magenta. An accent, never a fill. */
+  --secondary-foreground: 0 0% 100%; /* 4.7:1 */
+
+  --tertiary: 228 59% 46%; /* #304CBA — deep blue */
+  --tertiary-foreground: 0 0% 100%; /* 7.4:1 */
+
+  /* --- Neutrals ------------------------------------------------------- */
+  /* Pure grays, not blue-tinted: the palette's ground and ink are achromatic. */
+  --muted: 0 0% 94%; /* quiet fill */
+  --muted-foreground: 0 0% 40%; /* supporting text — 5.4:1 on the ground */
+
+  --accent: 0 0% 94%; /* hover fill for ghost + outline controls */
+  --accent-foreground: 0 0% 5%;
+
+  /* --- Status --------------------------------------------------------- */
+  /* Kept from the previous system: the brand palette carries no red, and
+     error states need one. */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* --- Lines + focus -------------------------------------------------- */
+  --border: 0 0% 89%;
+  --input: 0 0% 89%;
+  --ring: 203 89% 55%; /* matches primary */
+
+  /* --- Shape + type --------------------------------------------------- */
+  --radius: 1rem; /* generous corners, per the reference */
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Dark theme: the navy ground becomes the page, and the light blue leads
+   because it reads best on navy. The token names are the whole contract, so a
+   dark theme is a value swap and never a component change. */
+.dark {
+  --background: 230 60% 10%;
+  --foreground: 0 0% 100%;
+
+  --card: 230 45% 15%;
+  --card-foreground: 0 0% 100%;
+
+  --popover: 230 45% 15%;
+  --popover-foreground: 0 0% 100%;
+
+  --surface-deep: 230 65% 7%;
+  --surface-deep-foreground: 0 0% 100%;
+
+  --primary: 203 89% 60%;
+  --primary-foreground: 230 60% 10%;
+
+  --secondary: 316 90% 58%;
+  --secondary-foreground: 0 0% 100%;
+
+  --tertiary: 228 70% 62%;
+  --tertiary-foreground: 230 60% 10%;
+
+  --muted: 230 35% 20%;
+  --muted-foreground: 230 15% 72%;
+
+  --accent: 230 35% 20%;
+  --accent-foreground: 0 0% 100%;
+
+  --border: 230 30% 24%;
+  --input: 230 30% 24%;
+  --ring: 203 89% 60%;
+}
