@@ -66,6 +66,31 @@ this is preview-only scaffolding and changes nothing about the components.
 - **`Toast*`** — Radix portals into a fixed viewport. Previews render
   `ToastViewport` with `className="static …"` so the toast flows in place.
 
+## Hubo una segunda configuración de sync en `main`
+
+`main` llegó a tener su propio `.design-sync/` que sincronizaba los componentes de la
+app directamente (`srcDir: "src"`, `provider: LanguageProvider`,
+`componentSrcMap` apuntando a `src/components/ui/*`, `Header`, `Footer`), con
+`buildCmd: npx vite build --config .design-sync/vite.ds.config.js`. Esta rama la
+sustituye — `config.json` es un único archivo y no admite dos formas — y con ella se
+borraron sus dos archivos de apoyo, `ds-entry.js` y `vite.ds.config.js`, que quedaron
+huérfanos tras la fusión. Están en el historial si alguna vez hace falta volver.
+
+**Cuidado con el nombre:** aquel `.design-sync/vite.ds.config.js` se parecía muchísimo
+al `vite.config.ds.js` de la raíz, que es el que sí se usa.
+
+De esa configuración sobrevive una línea en `tailwind.config.js`, que se deja estar
+porque el archivo es de la app:
+
+```js
+'./.design-sync/previews/**/*.{js,jsx,ts,tsx}',   // no-op
+```
+
+**No hace nada.** Tailwind se salta los directorios que empiezan por punto (ver la
+sección de arriba), así que ese glob no encuentra ningún archivo. Es inocuo —
+`tailwind.ds.config.js` sobrescribe `content` de todos modos— pero no te fíes de él: si
+un preview necesita una clase, tiene que estar en el safelist o ser un estilo en línea.
+
 ## Known render warns (expected — not new)
 
 - `[FONT_REMOTE] "Poppins"` — the brand font loads from Google Fonts at runtime via
