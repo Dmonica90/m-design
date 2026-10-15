@@ -48,6 +48,12 @@ const PlaygroundPage = () => {
             descKey: "challenge7Desc",
             thumbnail: "/thumbnails/playcraft-assistant.png", 
             demoLink: "/challenge/playcraft-assistant/story.html" 
+        },
+        {
+            titleKey: "challenge8Title",
+            descKey: "challenge8Desc",
+            thumbnail: "/thumbnails/zero-trust.png",
+            demoLink: "/challenge/zero-trust/index.html"
         }
     ];
     return (
