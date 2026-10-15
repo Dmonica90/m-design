@@ -34,6 +34,11 @@
       "source": "/playcraft",
       "destination": "/challenges/playcraft-assistant/story.html",
       "permanent": false
+    },
+    {
+      "source": "/zero-trust",
+      "destination": "/challenge/zero-trust/index.html",
+      "permanent": false
     }
   ],
   "rewrites": [
