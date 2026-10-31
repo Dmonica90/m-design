@@ -371,6 +371,7 @@ function syncDedication(){renderOfrenda();}
 // La ofrenda se dibuja aparte y se copia al canvas visible para evitar parpadeos.
 async function renderOfrenda(){
   if(document.getElementById('altar-stage').style.display!=='block')return;
+  clearReady();
   const token=++renderToken;
   const scene=await Ofrenda.build({name:currentName(),phrase:currentPhrase(),photo:photoData,frame:frameType,extras:extraPhotos,style:altarStyle});
   if(token!==renderToken)return;
@@ -497,21 +498,42 @@ async function downloadStory(){
   try{
     const canvas=document.createElement('canvas');canvas.width=ofrendaScene.base.width;canvas.height=ofrendaScene.base.height;
     Ofrenda.drawFrame(canvas.getContext('2d'),ofrendaScene,0);
-    saveBlob(await Ofrenda.toBlob(canvas),`ofrenda-${ofrendaSlug()}-historia.png`);
+    await deliver(await Ofrenda.toBlob(canvas),`ofrenda-${ofrendaSlug()}-historia.png`,document.getElementById('image-button'));
   }catch(e){localFileNotice();}
 }
 async function downloadVideo(){
   const button=document.getElementById('video-button');
   if(!ofrendaScene||button.disabled)return;
+  if(readyFiles.has(button))return deliver(...readyFiles.get(button),button);
   button.disabled=true;
+  let result=null;
   try{
     button.classList.add('recording');
-    const {blob,ext}=await Ofrenda.record(ofrendaScene,{onProgress:p=>{button.dataset.count=`${Math.max(1,Math.ceil(Ofrenda.LOOP*(1-p)))}s`;}});
-    saveBlob(blob,`ofrenda-${ofrendaSlug()}-historia.${ext}`);
+    const {blob,ext}=await Ofrenda.record(ofrendaScene,{onProgress:p=>{button.dataset.count=`${Math.max(1,Math.ceil(Ofrenda.VIDEO_SECONDS*(1-p)))}s`;}});
+    result=[blob,`ofrenda-${ofrendaSlug()}-historia.${ext}`];
   }catch(e){
     if(e&&e.name==='SecurityError')localFileNotice();
     else alert(t('noVideo'));
   }finally{button.disabled=false;button.classList.remove('recording');delete button.dataset.count;}
+  // Tras 15 s de grabación el navegador ya no permite abrir el menú de compartir: se pide un toque más.
+  if(result){if(canShareFile(...result))markReady(button,result);else saveBlob(...result);}
+}
+// En el celular, el menú de compartir del sistema ofrece "Guardar en Fotos" / "Guardar en la galería".
+const readyFiles=new Map();
+function canShareFile(blob,name){
+  try{return isTouch&&!!navigator.canShare&&navigator.canShare({files:[new File([blob],name,{type:blob.type})]});}catch(e){return false;}
+}
+function markReady(button,file){readyFiles.set(button,file);button.classList.add('ready');button.dataset.count=t('tapToSave');}
+function clearReady(){readyFiles.forEach((f,b)=>{b.classList.remove('ready');delete b.dataset.count;});readyFiles.clear();}
+async function deliver(blob,name,button){
+  if(!canShareFile(blob,name))return saveBlob(blob,name);
+  try{
+    await navigator.share({files:[new File([blob],name,{type:blob.type})]});
+    if(button){readyFiles.delete(button);button.classList.remove('ready');delete button.dataset.count;}
+  }catch(e){
+    if(e&&e.name==='NotAllowedError'&&button)markReady(button,[blob,name]);
+    else if(!e||e.name!=='AbortError')saveBlob(blob,name);
+  }
 }
 function saveBlob(blob,name){
   const url=URL.createObjectURL(blob),a=document.createElement('a');
@@ -532,6 +554,9 @@ function toggleAudio(){
   // Si el botón conserva el foco, la barra espaciadora (saltar) lo vuelve a pulsar.
   document.getElementById('audio-toggle').blur();
 }
+// Phaser bloquea la barra espaciadora (salto) en toda la página; al escribir en un campo se libera.
+document.addEventListener('focusin',e=>{if(e.target.matches('input,textarea')&&game.input&&game.input.keyboard)game.input.keyboard.preventDefault=false;});
+document.addEventListener('focusout',e=>{if(e.target.matches('input,textarea')&&game.input&&game.input.keyboard)game.input.keyboard.preventDefault=true;});
 // Mientras se juega, espacio y Enter son controles del juego, no clics en botones.
 document.addEventListener('keydown',e=>{
   if(document.body.classList.contains('playing')&&(e.code==='Space'||e.code==='Enter')&&e.target.closest&&e.target.closest('button')&&!e.target.closest('.modal')){e.preventDefault();e.target.blur();}

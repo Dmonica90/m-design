@@ -232,7 +232,7 @@
   }
 
   // ---------- Animación en bucle de LOOP segundos (t va de 0 a 1) ----------
-  const LOOP = 6, TAU = Math.PI * 2;
+  const LOOP = 7.5, TAU = Math.PI * 2;
   let glowSprite = null;
   function getGlow() {
     if (glowSprite) return glowSprite;
@@ -282,16 +282,16 @@
     ctx.restore();
     // Aleteo con los 5 cuadros de vuelo a 15 cuadros/s (90 por ciclo, cierra exacto el bucle).
     const p = birdPos(t), dir = Math.cos(TAU * t) >= 0 ? 1 : -1;
-    const frame = a[`vuelo${1 + Math.floor(t * LOOP * 15) % 5}`] || a.colibri, size = frame === a.colibri ? 130 : 200;
+    const frame = a[`vuelo${1 + Math.floor(t * LOOP * 16) % 5}`] || a.colibri, size = frame === a.colibri ? 130 : 200;
     const w = frame === a.colibri ? size * frame.width / frame.height : size;
     ctx.save(); ctx.translate(p.x, p.y + 4 * Math.sin(TAU * 12 * t));
     ctx.rotate(.18 * Math.cos(TAU * t) * dir); ctx.scale(dir, 1);
     ctx.drawImage(frame, -w / 2, -size / 2, w, size); ctx.restore();
   }
 
-  // Graba el bucle como video (MP4 si el navegador lo permite, si no WebM).
+  // Graba el bucle como video (MP4 si el navegador lo permite, si no WebM); dos vueltas = 15 s.
   function record(scene, opts) {
-    const fps = (opts && opts.fps) || 30, onProgress = opts && opts.onProgress;
+    const fps = (opts && opts.fps) || 30, loops = (opts && opts.loops) || 2, onProgress = opts && opts.onProgress;
     return new Promise((resolve, reject) => {
       const types = ['video/mp4;codecs=avc1.42E01E', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'];
       const type = window.MediaRecorder && types.find(t => MediaRecorder.isTypeSupported(t));
@@ -299,14 +299,14 @@
       const c = document.createElement('canvas'); c.width = W; c.height = H;
       const ctx = c.getContext('2d'); drawFrame(ctx, scene, 0);
       let stream; try { stream = c.captureStream(fps); } catch (e) { reject(e); return; }
-      const rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 8e6 }), chunks = [];
+      const rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 6e6 }), chunks = [];
       rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
       rec.onerror = e => reject(e.error || e);
       rec.onstop = () => resolve({ blob: new Blob(chunks, { type: type.split(';')[0] }), ext: type.startsWith('video/mp4') ? 'mp4' : 'webm' });
-      const total = LOOP * fps; let f = 0;
+      const perLoop = LOOP * fps, total = perLoop * loops; let f = 0;
       rec.start(250);
       const timer = setInterval(() => {
-        drawFrame(ctx, scene, f / total); f++;
+        drawFrame(ctx, scene, (f % perLoop) / perLoop); f++;
         if (onProgress) onProgress(f / total);
         if (f >= total) { clearInterval(timer); setTimeout(() => rec.stop(), 150); }
       }, 1000 / fps);
@@ -320,5 +320,5 @@
   }
 
   // warm(): descarga las imágenes de la ofrenda en segundo plano mientras se juega.
-  window.Ofrenda = { warm: loadAll, build, drawFrame, record, toBlob, LOOP, STYLES, MAX_EXTRAS: SLOTS.length };
+  window.Ofrenda = { warm: loadAll, build, drawFrame, record, toBlob, LOOP, VIDEO_SECONDS: LOOP * 2, STYLES, MAX_EXTRAS: SLOTS.length };
 })();
