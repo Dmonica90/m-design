@@ -497,7 +497,8 @@ async function downloadStory(){
   if(!ofrendaScene)return;
   try{
     const canvas=document.createElement('canvas');canvas.width=ofrendaScene.base.width;canvas.height=ofrendaScene.base.height;
-    Ofrenda.drawFrame(canvas.getContext('2d'),ofrendaScene,0);
+    // En t=.75 el colibrí vuela en la esquina superior izquierda, sin tapar el retrato.
+    Ofrenda.drawFrame(canvas.getContext('2d'),ofrendaScene,.75);
     await deliver(await Ofrenda.toBlob(canvas),`ofrenda-${ofrendaSlug()}-historia.png`,document.getElementById('image-button'));
   }catch(e){localFileNotice();}
 }
