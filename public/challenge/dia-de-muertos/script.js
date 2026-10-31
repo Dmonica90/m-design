@@ -255,15 +255,20 @@ function update(){
   if(fallingPetals){const v=sceneRef.cameras.main.worldView;fallingPetals.setPosition(v.x,v.y-20);}
 }
 
+let wasAirborne=false, landingUntil=0;
 function updateAvatarAnimation(grounded){
   player.setFlipX(avatarFacing<0);
+  const now=sceneRef.time.now;
   if(!grounded){
-    // En el aire el cuadro sigue a la velocidad vertical: impulso (1), punto alto (4) y caída (7).
-    player.anims.stop();
+    // En el aire el cuadro sigue a la velocidad vertical: impulso (1), punto alto (4) y bajada (6).
+    wasAirborne=true;player.anims.stop();
     const vy=Phaser.Math.Clamp(player.body.velocity.y,-540,540);
-    player.setTexture(`salto${1+Math.round((vy+540)/1080*6)}`);
+    player.setTexture(`salto${1+Math.round((vy+540)/1080*5)}`);
     return;
   }
+  // Al tocar el suelo se ve la pose de aterrizaje (salto7) un instante.
+  if(wasAirborne){wasAirborne=false;landingUntil=now+170;}
+  if(now<landingUntil){player.anims.stop();player.setTexture('salto7');return;}
   player.anims.play(Math.abs(player.body.velocity.x)>1?'walk':'idle',true);
 }
 
