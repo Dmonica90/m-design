@@ -10,6 +10,7 @@
     calav4: 'assets/1x/calaverita4.png', calav5: 'assets/1x/calaverita5.png', calav6: 'assets/1x/calaverita6.png'
   };
   for (let i = 1; i <= 6; i++) SRC[`pp${i}`] = `assets/1x/papelpicado${i}.png`;
+  for (let i = 1; i <= 5; i++) SRC[`vuelo${i}`] = `assets/colibri/colibri${i}.png`;
 
   // Hueco transparente de cada marco, medido sobre los PNG.
   const HOLES = {
@@ -279,11 +280,13 @@
       ctx.globalAlpha = .5 * (1 - k / 10); ctx.drawImage(glowImg, p.x - s / 2 + (Math.cos(TAU * t) > 0 ? -40 : 40), p.y + 8 - s / 2, s, s);
     }
     ctx.restore();
-    const p = birdPos(t), dir = Math.cos(TAU * t) >= 0 ? 1 : -1, h = 130, w = h * a.colibri.width / a.colibri.height;
-    const flap = 1 - .2 * Math.abs(Math.sin(TAU * 24 * t));
+    // Aleteo con los 5 cuadros de vuelo a 15 cuadros/s (90 por ciclo, cierra exacto el bucle).
+    const p = birdPos(t), dir = Math.cos(TAU * t) >= 0 ? 1 : -1;
+    const frame = a[`vuelo${1 + Math.floor(t * LOOP * 15) % 5}`] || a.colibri, size = frame === a.colibri ? 130 : 200;
+    const w = frame === a.colibri ? size * frame.width / frame.height : size;
     ctx.save(); ctx.translate(p.x, p.y + 4 * Math.sin(TAU * 12 * t));
-    ctx.rotate(.18 * Math.cos(TAU * t) * dir); ctx.scale(dir, flap);
-    ctx.drawImage(a.colibri, -w / 2, -h / 2, w, h); ctx.restore();
+    ctx.rotate(.18 * Math.cos(TAU * t) * dir); ctx.scale(dir, 1);
+    ctx.drawImage(frame, -w / 2, -size / 2, w, size); ctx.restore();
   }
 
   // Graba el bucle como video (MP4 si el navegador lo permite, si no WebM).
