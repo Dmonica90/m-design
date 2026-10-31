@@ -339,7 +339,7 @@ async function renderOfrenda(){
   const token=++renderToken;
   const scene=await Ofrenda.build({name:dedication,phrase:postcardPhrase,photo:photoData,frame:frameType,extras:extraPhotos,style:altarStyle});
   if(token!==renderToken)return;
-  ofrendaScene=scene;resetShare();
+  ofrendaScene=scene;
   const canvas=document.getElementById('ofrenda-canvas');canvas.width=scene.base.width;canvas.height=scene.base.height;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)Ofrenda.drawFrame(canvas.getContext('2d'),scene,0);
   else if(!ofrendaRaf)ofrendaRaf=requestAnimationFrame(ofrendaLoop);
@@ -416,44 +416,6 @@ async function downloadStory(){
     saveBlob(await Ofrenda.toBlob(canvas),`ofrenda-${ofrendaSlug()}-historia.png`);
   }catch(e){localFileNotice();}
 }
-// Compartir: graba el video y abre la hoja de compartir del sistema (Instagram,
-// WhatsApp…). El navegador solo permite abrirla justo después de un toque, así que
-// si la grabación tarda, el botón queda listo y un segundo toque comparte.
-let shareFile=null;
-function resetShare(){
-  shareFile=null;const button=document.getElementById('share-button');
-  if(button){button.classList.remove('ready');delete button.dataset.count;}
-}
-function canShareFile(file){return !!(navigator.canShare&&navigator.share&&navigator.canShare({files:[file]}));}
-async function openShareSheet(){
-  try{await navigator.share({files:[shareFile],title:'El camino de los pétalos',text:'Mi ofrenda de Día de Muertos 🌼'});}
-  catch(e){if(e&&e.name==='AbortError')return;throw e;}
-}
-async function shareOfrenda(){
-  const button=document.getElementById('share-button');
-  if(!ofrendaScene||button.disabled)return;
-  if(shareFile){try{await openShareSheet();}catch(e){saveBlob(shareFile,shareFile.name);shareFallbackNotice();}return;}
-  button.disabled=true;button.classList.add('recording');
-  try{
-    const {blob,ext}=await Ofrenda.record(ofrendaScene,{onProgress:p=>{button.dataset.count=`${Math.max(1,Math.ceil(Ofrenda.LOOP*(1-p)))}s`;}});
-    let file=new File([blob],`ofrenda-${ofrendaSlug()}-historia.${ext}`,{type:blob.type});
-    if(!canShareFile(file)){
-      // Sin video compartible, se intenta con la imagen; si tampoco, se descarga.
-      const canvas=document.createElement('canvas');canvas.width=ofrendaScene.base.width;canvas.height=ofrendaScene.base.height;
-      Ofrenda.drawFrame(canvas.getContext('2d'),ofrendaScene,0);
-      const png=new File([await Ofrenda.toBlob(canvas)],`ofrenda-${ofrendaSlug()}-historia.png`,{type:'image/png'});
-      if(!canShareFile(png)){saveBlob(blob,file.name);shareFallbackNotice();return;}
-      file=png;
-    }
-    shareFile=file;
-    button.classList.add('ready');button.dataset.count='¡Comparte!';
-    try{await openShareSheet();}catch(e){/* Pasó el permiso del toque: el siguiente toque comparte. */}
-  }catch(e){
-    if(e&&e.name==='SecurityError')localFileNotice();
-    else alert('No se pudo preparar tu ofrenda para compartir. Prueba descargando el video.');
-  }finally{button.disabled=false;button.classList.remove('recording');}
-}
-function shareFallbackNotice(){alert('Tu ofrenda se descargó. Ábrela desde tu galería y súbela a tus historias de Instagram 🌼');}
 async function downloadVideo(){
   const button=document.getElementById('video-button');
   if(!ofrendaScene||button.disabled)return;
@@ -670,4 +632,4 @@ document.getElementById('extra-photo-input').addEventListener('change',async eve
   const preview=document.getElementById('extra-preview');preview.src=pendingExtra;preview.hidden=!pendingExtra;
   document.getElementById('place-photo-button').disabled=!pendingExtra;
 });
-window.iniciarJuego=iniciarJuego;window.closeStory=closeStory;window.restartJourney=restartJourney;window.downloadStory=downloadStory;window.downloadVideo=downloadVideo;window.shareOfrenda=shareOfrenda;window.setAltarStyle=setAltarStyle;window.openPhotoModal=openPhotoModal;window.closePhotoModal=closePhotoModal;window.placeExtraPhoto=placeExtraPhoto;window.toggleAudio=toggleAudio;
+window.iniciarJuego=iniciarJuego;window.closeStory=closeStory;window.restartJourney=restartJourney;window.downloadStory=downloadStory;window.downloadVideo=downloadVideo;window.setAltarStyle=setAltarStyle;window.openPhotoModal=openPhotoModal;window.closePhotoModal=closePhotoModal;window.placeExtraPhoto=placeExtraPhoto;window.toggleAudio=toggleAudio;
