@@ -1,13 +1,13 @@
 // El recorrido conserva el movimiento de plataformas de Phaser y convierte
 // cada encuentro en un capítulo de la historia del colibrí.
 const pasos = [
-  {id:'foto', nombre:'El retrato · El inicio del camino', sprite:'marco', y:268, texto:'Andaba la Calaquita\nbuscando a quién recordar,\ncon un marco muy bonito\nque hoy vuelve a brillar.\n\nDice el colibrí volando:\n«Pon su rostro en este altar,\nque el amor que le tenemos\nla muerte no ha de borrar».', x:480},
-  {id:'copal', nombre:'El copal · El aliento', sprite:'copal', y:262, texto:'Siguió su ruta la huesuda\npor el caminito gris,\ncuando un aroma de humito\nla sacó de su matriz.\n\n«Es el copal —dice el ave—,\nque purifica el lugar,\npara que el alma querida\nhalle paz al regresar».', x:1050},
-  {id:'velas', nombre:'Las velas · La luz', sprite:'vela1', y:272, texto:'Al caer la tarde oscurita\nla flama empieza a temblar,\nson las velas encendidas\nque alumbran el bien llegar.\n\nEl colibrí revolotea\ny le vuelve a recordar:\n«Ninguna alma se nos pierde\nsi hay una luz en el hogar».', x:1620},
-  {id:'comida', nombre:'Pan de muerto y mole · Los sabores', sprite:'pan', y:258, texto:'De repente, por el suelo,\nun olor rico sopló:\nera un pan con harto azahar\ny un mole que despertó.\n\n«Con pan de huesitos ricos\ny un buen plato de sazón,\nles damos la bienvenida\ncon todo nuestro corazón».', x:2190},
-  {id:'calaverita', nombre:'Calaverita y papel picado · El color y la dulzura', sprite:'calav2', y:276, texto:'Bailaba el papel al viento\ncon colores de ilusión,\nmientras una calaverita\nle regalaba un panteón.\n\n«La muerte no es tan amarga\nsi se celebra el vivir;\nmira el papel cómo danza\npara a las almas reír».', x:2760},
-  {id:'sal', nombre:'La sal · La purificación', sprite:'sal', y:262, texto:'Cae la flaca tropezando\ndonde un cuenco blanco hay:\nes la sal de la concordia\nque cuida el alma en el \'ay\'.\n\n«Sirve de guía y custodia\npara que al ir y venir,\nel espíritu se guarde\nsin corromperse ni huir».', x:3330},
-  {id:'flores', nombre:'El cempasúchil · El gran final', sprite:'flor', y:270, texto:'Por fin huele a sol y campo\nel sendero que pisó:\n¡era el cempasúchil tierno\nque el camino iluminó!\n\nDice el colibrí dichoso:\n«Ya está lista la mansión,\npueden pasar a la mesa\na celebrar la unión».', x:3900}
+  {id:'foto', nombre_en:"The Portrait · The Beginning of the Journey", texto_en:"Little Miss Skeleton wandered near,\nSearching for a face so dear.\nA lovely frame began to glow,\nA memory brought back to show.\n\nA hummingbird flew by and said:\n“Place their portrait where love is spread.\nFor those we love will never part,\nDeath cannot erase them from our hearts.”", nombre:'El retrato · El inicio del camino', sprite:'marco', y:268, texto:'Andaba la Calaquita\nbuscando a quién recordar,\ncon un marco muy bonito\nque hoy vuelve a brillar.\n\nDice el colibrí volando:\n«Pon su rostro en este altar,\nque el amor que le tenemos\nla muerte no ha de borrar».', x:480},
+  {id:'copal', nombre_en:"The Copal · The Breath of Life", texto_en:"The bony lady walked along,\nThrough misty paths, both gray and long.\nThen came a sweet and fragrant smoke,\nA gentle scent that seemed to spoke.\n\n“It’s copal,” the little bird explained,\n“A sacred smoke, a gift regained.\nIt cleanses the path, so souls may find\nA peaceful welcome, warm and kind.”", nombre:'El copal · El aliento', sprite:'copal', y:262, texto:'Siguió su ruta la huesuda\npor el caminito gris,\ncuando un aroma de humito\nla sacó de su matriz.\n\n«Es el copal —dice el ave—,\nque purifica el lugar,\npara que el alma querida\nhalle paz al regresar».', x:1050},
+  {id:'velas', nombre_en:"The Candles · The Light", texto_en:"As evening fell and skies turned dark,\nThe candle flames began to spark.\nTheir golden glow lit up the way,\nTo guide the souls who've come to stay.\n\nThe hummingbird flew round and round:\n“No soul is ever truly lost or bound,\nAs long as there's a light aglow,\nAnd a loving home to welcome those.”", nombre:'Las velas · La luz', sprite:'vela1', y:272, texto:'Al caer la tarde oscurita\nla flama empieza a temblar,\nson las velas encendidas\nque alumbran el bien llegar.\n\nEl colibrí revolotea\ny le vuelve a recordar:\n«Ninguna alma se nos pierde\nsi hay una luz en el hogar».', x:1620},
+  {id:'comida', nombre_en:"Pan de Muerto and Mole · The Flavors", texto_en:"A delicious scent came drifting by,\nLike orange blossoms in the sky.\nIt was Pan de Muerto, soft and sweet,\nAnd mole, a feast no soul could beat!\n\n“With bread adorned with bones so small,\nAnd mole prepared to welcome all,\nWe offer food, we offer cheer,\nWith all our hearts, you're welcome here!”", nombre:'Pan de muerto y mole · Los sabores', sprite:'pan', y:258, texto:'De repente, por el suelo,\nun olor rico sopló:\nera un pan con harto azahar\ny un mole que despertó.\n\n«Con pan de huesitos ricos\ny un buen plato de sazón,\nles damos la bienvenida\ncon todo nuestro corazón».', x:2190},
+  {id:'calaverita', nombre_en:"Sugar Skulls and Papel Picado · Color and Sweetness", texto_en:"The papel picado danced in the breeze,\nWith colors swaying through the trees.\nA little sugar skull, so bright,\nBrought sweetness to this festive night.\n\n“Death is not so bitter, you see,\nWhen life is celebrated joyfully.\nLook how the paper dances high,\nAnd brings a smile to souls nearby!”", nombre:'Calaverita y papel picado · El color y la dulzura', sprite:'calav2', y:276, texto:'Bailaba el papel al viento\ncon colores de ilusión,\nmientras una calaverita\nle regalaba un panteón.\n\n«La muerte no es tan amarga\nsi se celebra el vivir;\nmira el papel cómo danza\npara a las almas reír».', x:2760},
+  {id:'sal', nombre_en:"The Salt · Purification", texto_en:"The bony lady stumbled down,\nRight where a little white bowl was found.\nIt held the salt, so pure and bright,\nA symbol of protection through the night.\n\n“It guides and guards the spirits here,\nAs they journey far and near.\nA little salt to keep them safe,\nAs they return to their resting place.”", nombre:'La sal · La purificación', sprite:'sal', y:262, texto:'Cae la flaca tropezando\ndonde un cuenco blanco hay:\nes la sal de la concordia\nque cuida el alma en el \'ay\'.\n\n«Sirve de guía y custodia\npara que al ir y venir,\nel espíritu se guarde\nsin corromperse ni huir».', x:3330},
+  {id:'flores', nombre_en:"The Marigolds · The Grand Finale", texto_en:"At last, the path smelled just like spring,\nWith golden flowers blossoming.\nIt was the marigolds, bright and bold,\nLighting the way with petals of gold!\n\nThe hummingbird chirped with delight:\n“The house is ready, shining bright!\nCome take your place, the feast is set,\nA celebration we'll never forget!”", nombre:'El cempasúchil · El gran final', sprite:'flor', y:270, texto:'Por fin huele a sol y campo\nel sendero que pisó:\n¡era el cempasúchil tierno\nque el camino iluminó!\n\nDice el colibrí dichoso:\n«Ya está lista la mansión,\npueden pasar a la mesa\na celebrar la unión».', x:3900}
 ];
 // Paleta "Autumn in Mexico": cempasúchil, magenta night, majestic purple y golden yellow.
 const PAL={cempa:0xF27A01,magenta:0xC2257A,purple:0x360543,gold:0xF7AB11,cream:0xFFF3DC,turq:0x3FC1C9,lav:0x8A4FB8};
@@ -24,8 +24,14 @@ let collected = new Set();
 let currentStep = 0;
 let photoData = '';
 let extraPhotos = [];
-let dedication = 'Alguien especial';
-let postcardPhrase = 'Tu recuerdo florece en cada pétalo.';
+// Nombre vacío = "Alguien especial" en el idioma activo. La frase es el índice de una
+// de las frases sugeridas (0–2) o el texto propio que escribió la persona.
+let dedication = '';
+let phraseChoice = 0;
+const currentName=()=>dedication||t('defaultName');
+const currentPhrase=()=>typeof phraseChoice==='number'?t(`phrase${phraseChoice}`):phraseChoice;
+const stepName=step=>lang==='en'?step.nombre_en:step.nombre;
+const stepText=step=>lang==='en'?step.texto_en:step.texto;
 let frameType = 'persona';
 let pendingItem = null;
 let player, cursors, items, sceneRef, guide, guideTrail;
@@ -60,7 +66,8 @@ const game = new Phaser.Game(config);
 
 function preload(){
   const img=(key,path)=>this.load.image(key,encodeURI(path));
-  [['stay',3],['walk',6],['jump',4]].forEach(([name,count])=>{for(let i=1;i<=count;i++)img(`${name}${i}`,`assets/personaje/${name}/${name}${i}.png`);});
+  // Esqueleto: cuadros recortados y reducidos desde assets/personaje/walk/Skeleton 0N.png.
+  for(let i=1;i<=8;i++)img(`correr${i}`,`assets/personaje/esqueleto/correr${i}.png`);
   img('game-background','assets/Background_all.png');
   for(let i=1;i<=5;i++)img(`colibriFlight${i}`,`assets/colibri/colibri${i}.png`);
   for(let i=1;i<=11;i++)img(`tumba1Frame${i}`,`assets/tumba1/tumbaM${i}.png`);
@@ -91,9 +98,9 @@ function create(){
   addStreetDecor(this);
 
   createAnimations(this);
-  player=this.physics.add.sprite(250,GROUND-140,'stay1').setScale(.5).setDepth(20);
-  // El cuerpo termina justo en las suelas (fila 250 de 256 en cada frame).
-  player.body.setSize(44,240).setOffset(42,10);
+  player=this.physics.add.sprite(250,GROUND-140,'correr1').setScale(.47).setDepth(20);
+  // Cuadros de 199×256 con el suelo en la fila 256; cuerpo centrado para que no se mueva al voltear.
+  player.body.setSize(70,236).setOffset(64,20);
   player.setCollideWorldBounds(true);
   player.play('idle');
   this.physics.add.collider(player,floor);
@@ -144,9 +151,10 @@ function fitWorldToScreen(){
 function createAnimations(scene){
   if(scene.anims.exists('idle'))return;
   const frames=(name,count)=>Array.from({length:count},(_,i)=>({key:`${name}${i+1}`}));
-  scene.anims.create({key:'idle',frames:frames('stay',3),frameRate:3,repeat:-1});
-  scene.anims.create({key:'walk',frames:frames('walk',6),frameRate:10,repeat:-1});
-  scene.anims.create({key:'jump',frames:frames('jump',4),frameRate:8,repeat:0});
+  // Quieto y salto usan por ahora una imagen fija de la carrera, hasta tener sus propios cuadros.
+  scene.anims.create({key:'idle',frames:[{key:'correr1'}],frameRate:1,repeat:-1});
+  scene.anims.create({key:'walk',frames:frames('correr',8),frameRate:14,repeat:-1});
+  scene.anims.create({key:'jump',frames:[{key:'correr1'}],frameRate:1,repeat:0});
   scene.anims.create({key:'colibri-flight',frames:frames('colibriFlight',5),frameRate:12,repeat:-1});
   TRAPS.forEach(t=>scene.anims.create({key:`${t.key}-rise`,frames:frames(`${t.key}Frame`,t.frames),frameRate:5,repeat:-1}));
 }
@@ -286,34 +294,38 @@ function collectItem(_player,item){
   if(!item.active||item.stepIndex!==currentStep||pendingItem)return;
   leftDown=false;rightDown=false;jumpDown=false;
   pendingItem=item;player.body.setVelocity(0,0);sceneRef.scene.pause();
-  const step=pasos[item.stepIndex];
-  document.getElementById('modal-eyebrow').textContent=`Calaverita ${['I','II','III','IV','V','VI','VII'][item.stepIndex]} · Un recuerdo te acompaña`;
-  document.getElementById('modal-title').textContent=step.nombre;
-  const art=document.getElementById('step-art-img');art.src=`assets/pasos/paso${item.stepIndex+1}.jpg`;art.alt=step.nombre;
-  document.getElementById('modal-story').textContent=step.texto;
-  const customFields=document.getElementById('custom-fields'),optionsToggle=document.getElementById('portrait-options-toggle');
-  customFields.hidden=true;
-  optionsToggle.hidden=step.id!=='foto';
-  optionsToggle.setAttribute('aria-expanded','false');
-  optionsToggle.textContent='📷 Agregar foto y nombre';
-  document.getElementById('collect-button').textContent=step.id==='foto'?'Guardar y continuar':'Continuar el camino';
+  document.getElementById('custom-fields').hidden=true;
+  fillStory(item.stepIndex);
   document.getElementById('story-modal').classList.add('open');
   if(sceneRef.cache.audio.exists('pickup'))sceneRef.sound.play('pickup',{volume:.55});
 }
 
+// Textos de la ventana de un paso en el idioma activo (también al cambiar de idioma).
+function fillStory(index){
+  const step=pasos[index];
+  document.getElementById('modal-eyebrow').textContent=t('stepEyebrow',{n:['I','II','III','IV','V','VI','VII'][index]});
+  document.getElementById('modal-title').textContent=stepName(step);
+  const art=document.getElementById('step-art-img');art.src=`assets/pasos/paso${index+1}.jpg`;art.alt=stepName(step);
+  document.getElementById('modal-story').textContent=stepText(step);
+  const fields=document.getElementById('custom-fields'),optionsToggle=document.getElementById('portrait-options-toggle');
+  optionsToggle.hidden=step.id!=='foto';
+  optionsToggle.setAttribute('aria-expanded',String(!fields.hidden));
+  optionsToggle.textContent=fields.hidden?t('addPhotoName'):t('hideOptions');
+  document.getElementById('collect-button').textContent=step.id==='foto'?t('saveContinue'):t('continuePath');
+}
 function togglePortraitOptions(){
   const fields=document.getElementById('custom-fields'),button=document.getElementById('portrait-options-toggle');
   fields.hidden=!fields.hidden;
   button.setAttribute('aria-expanded',String(!fields.hidden));
-  button.textContent=fields.hidden?'📷 Agregar foto y nombre':'Ocultar opciones';
+  button.textContent=fields.hidden?t('addPhotoName'):t('hideOptions');
   if(!fields.hidden)fields.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function closeStory(){
   if(!pendingItem)return;
   if(pendingItem.stepIndex===0){
-    dedication=document.getElementById('dedication-input').value.trim()||'Alguien especial';
-    postcardPhrase=document.getElementById('custom-phrase-input').value.trim()||document.querySelector('input[name="phrase"]:checked').value;
+    dedication=document.getElementById('dedication-input').value.trim();
+    phraseChoice=document.getElementById('custom-phrase-input').value.trim()||Number(document.querySelector('input[name="phrase"]:checked').value);
     frameType=document.querySelector('input[name="frame"]:checked').value;
   }
   const item=pasos[pendingItem.stepIndex];collected.add(item.id);
@@ -330,15 +342,15 @@ function closeStory(){
 
 function renderProgress(){
   const root=document.getElementById('progress');root.innerHTML='';
-  pasos.forEach((step,i)=>{const b=document.createElement('span');b.className='earned-item'+(collected.has(step.id)?' won':'');b.title=step.nombre;b.setAttribute('aria-label',step.nombre+(collected.has(step.id)?' recolectado':' pendiente'));const flower=document.createElement('img');flower.src='assets/1x/Flor.png';flower.alt='';b.appendChild(flower);root.appendChild(b);});
-  document.getElementById('earned-count').textContent=`Recuerdos reunidos · ${collected.size}/${pasos.length}`;
+  pasos.forEach((step,i)=>{const b=document.createElement('span');b.className='earned-item'+(collected.has(step.id)?' won':'');b.title=stepName(step);b.setAttribute('aria-label',stepName(step)+(collected.has(step.id)?' recolectado':' pendiente'));const flower=document.createElement('img');flower.src='assets/1x/Flor.png';flower.alt='';b.appendChild(flower);root.appendChild(b);});
+  document.getElementById('earned-count').textContent=t('hudCount',{n:collected.size,total:pasos.length});
 }
 function syncDedication(){renderOfrenda();}
 // La ofrenda se dibuja aparte y se copia al canvas visible para evitar parpadeos.
 async function renderOfrenda(){
   if(document.getElementById('altar-stage').style.display!=='block')return;
   const token=++renderToken;
-  const scene=await Ofrenda.build({name:dedication,phrase:postcardPhrase,photo:photoData,frame:frameType,extras:extraPhotos,style:altarStyle});
+  const scene=await Ofrenda.build({name:currentName(),phrase:currentPhrase(),photo:photoData,frame:frameType,extras:extraPhotos,style:altarStyle});
   if(token!==renderToken)return;
   ofrendaScene=scene;
   const canvas=document.getElementById('ofrenda-canvas');canvas.width=scene.base.width;canvas.height=scene.base.height;
@@ -348,7 +360,7 @@ async function renderOfrenda(){
   const full=extraPhotos.length>=Ofrenda.MAX_EXTRAS,add=document.getElementById('add-photo-button');
   // El botón es un icono: el contador va en el título y la etiqueta accesible.
   document.getElementById('edit-portrait-button').classList.toggle('attention',!photoData);
-  const label=full?'Ofrenda completa':`Agregar más fotos (${extraPhotos.length}/${Ofrenda.MAX_EXTRAS})`;
+  const label=full?t('offeringFull'):t('addMorePhotos',{n:extraPhotos.length,max:Ofrenda.MAX_EXTRAS});
   add.disabled=full;add.title=label;add.setAttribute('aria-label',label);
 }
 // Bucle de animación de la ofrenda mientras la página del altar está visible.
@@ -366,7 +378,7 @@ function showAltar(){
   renderOfrenda();window.scrollTo({top:0,behavior:'smooth'});
 }
 function resetProgress(){
-  collected.clear();currentStep=0;dedication='Alguien especial';photoData='';extraPhotos=[];frameType='persona';altarStyle='tradicional';pendingItem=null;
+  collected.clear();currentStep=0;dedication='';phraseChoice=0;photoData='';extraPhotos=[];frameType='persona';altarStyle='tradicional';pendingItem=null;
   document.getElementById('extra-photo-input').value='';document.getElementById('photo-input').value='';
   document.getElementById('dedication-input').value='';
   document.getElementById('custom-phrase-input').value='';document.querySelector('input[name="phrase"]').checked=true;
@@ -399,7 +411,7 @@ function resumeAfterModal(){
 }
 function openGuide(){
   guideFromStart=!document.body.classList.contains('playing');
-  document.getElementById('guide-start').textContent=guideFromStart?'¡A jugar!':'Seguir jugando';
+  document.getElementById('guide-start').textContent=guideFromStart?t('letsPlay'):t('keepPlaying');
   pauseForModal();
   document.getElementById('guide-modal').classList.add('open');
 }
@@ -467,16 +479,16 @@ async function downloadVideo(){
     saveBlob(blob,`ofrenda-${ofrendaSlug()}-historia.${ext}`);
   }catch(e){
     if(e&&e.name==='SecurityError')localFileNotice();
-    else alert('Este navegador no puede grabar video. Prueba con Chrome o Safari actualizados, o descarga la imagen.');
+    else alert(t('noVideo'));
   }finally{button.disabled=false;button.classList.remove('recording');delete button.dataset.count;}
 }
 function saveBlob(blob,name){
   const url=URL.createObjectURL(blob),a=document.createElement('a');
   a.download=name;a.href=url;a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);
 }
-function ofrendaSlug(){return dedication.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'ofrenda';}
+function ofrendaSlug(){return currentName().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'ofrenda';}
 // Abierto como archivo local, el navegador bloquea exportar imágenes del disco.
-function localFileNotice(){alert('Para descargar tu ofrenda abre el juego desde su página web (http/https), no como archivo local.');}
+function localFileNotice(){alert(t('localFile'));}
 
 function createMobileControls(){
   const bindings=[['btn-izq','left'],['btn-der','right'],['btn-salto','jump']];
@@ -653,21 +665,21 @@ function resizePhoto(file){
 let pendingPortrait='';
 function openPortraitModal(){
   pendingPortrait=photoData;
-  document.getElementById('portrait-name-input').value=dedication==='Alguien especial'?'':dedication;
+  document.getElementById('portrait-name-input').value=dedication;
   document.getElementById('portrait-photo-input').value='';
   const preview=document.getElementById('portrait-preview');preview.src=photoData||'';preview.hidden=!photoData;
   document.querySelector(`input[name="portrait-frame"][value="${frameType}"]`).checked=true;
-  const preset=[...document.querySelectorAll('input[name="portrait-phrase"]')].find(r=>r.value===postcardPhrase);
-  (preset||document.querySelector('input[name="portrait-phrase"]')).checked=true;
-  document.getElementById('portrait-phrase-input').value=preset?'':postcardPhrase;
+  const preset=typeof phraseChoice==='number';
+  document.querySelector(`input[name="portrait-phrase"][value="${preset?phraseChoice:0}"]`).checked=true;
+  document.getElementById('portrait-phrase-input').value=preset?'':phraseChoice;
   document.getElementById('portrait-modal').classList.add('open');
 }
 function closePortraitModal(){document.getElementById('portrait-modal').classList.remove('open');}
 function savePortrait(){
-  dedication=document.getElementById('portrait-name-input').value.trim()||'Alguien especial';
+  dedication=document.getElementById('portrait-name-input').value.trim();
   photoData=pendingPortrait;
   frameType=document.querySelector('input[name="portrait-frame"]:checked').value;
-  postcardPhrase=document.getElementById('portrait-phrase-input').value.trim()||document.querySelector('input[name="portrait-phrase"]:checked').value;
+  phraseChoice=document.getElementById('portrait-phrase-input').value.trim()||Number(document.querySelector('input[name="portrait-phrase"]:checked').value);
   closePortraitModal();renderOfrenda();
 }
 document.getElementById('portrait-photo-input').addEventListener('change',async event=>{
@@ -699,4 +711,15 @@ document.getElementById('extra-photo-input').addEventListener('change',async eve
   const preview=document.getElementById('extra-preview');preview.src=pendingExtra;preview.hidden=!pendingExtra;
   document.getElementById('place-photo-button').disabled=!pendingExtra;
 });
-window.iniciarJuego=iniciarJuego;window.openPortraitModal=openPortraitModal;window.closePortraitModal=closePortraitModal;window.savePortrait=savePortrait;window.openGuide=openGuide;window.closeGuide=closeGuide;window.openRestart=openRestart;window.closeRestart=closeRestart;window.reiniciarRecorrido=reiniciarRecorrido;window.closeStory=closeStory;window.restartJourney=restartJourney;window.downloadStory=downloadStory;window.downloadVideo=downloadVideo;window.setAltarStyle=setAltarStyle;window.openPhotoModal=openPhotoModal;window.closePhotoModal=closePhotoModal;window.placeExtraPhoto=placeExtraPhoto;window.toggleAudio=toggleAudio;
+// Cambio de idioma: aplica el diccionario y vuelve a pintar lo que esté abierto.
+function setLang(next){
+  lang=next;
+  try{localStorage.setItem('petalos-lang',lang);}catch(e){}
+  applyI18n();renderProgress();
+  if(pendingItem)fillStory(pendingItem.stepIndex);
+  if(document.getElementById('guide-modal').classList.contains('open'))document.getElementById('guide-start').textContent=guideFromStart?t('letsPlay'):t('keepPlaying');
+  if(document.getElementById('altar-stage').style.display==='block')renderOfrenda();
+}
+function toggleLang(){setLang(lang==='es'?'en':'es');}
+applyI18n();
+window.toggleLang=toggleLang;window.iniciarJuego=iniciarJuego;window.openPortraitModal=openPortraitModal;window.closePortraitModal=closePortraitModal;window.savePortrait=savePortrait;window.openGuide=openGuide;window.closeGuide=closeGuide;window.openRestart=openRestart;window.closeRestart=closeRestart;window.reiniciarRecorrido=reiniciarRecorrido;window.closeStory=closeStory;window.restartJourney=restartJourney;window.downloadStory=downloadStory;window.downloadVideo=downloadVideo;window.setAltarStyle=setAltarStyle;window.openPhotoModal=openPhotoModal;window.closePhotoModal=closePhotoModal;window.placeExtraPhoto=placeExtraPhoto;window.toggleAudio=toggleAudio;
