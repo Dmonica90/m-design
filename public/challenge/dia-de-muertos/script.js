@@ -67,7 +67,10 @@ const game = new Phaser.Game(config);
 function preload(){
   const img=(key,path)=>this.load.image(key,encodeURI(path));
   // Esqueleto: cuadros recortados y reducidos desde assets/personaje/walk/Skeleton 0N.png.
+  // Esqueleto: cuadros de walk/, stay/ y jump/ recortados con la misma caja (285×272, suelo abajo).
   for(let i=1;i<=8;i++)img(`correr${i}`,`assets/personaje/esqueleto/correr${i}.png`);
+  for(let i=1;i<=3;i++)img(`quieto${i}`,`assets/personaje/esqueleto/quieto${i}.png`);
+  for(let i=1;i<=7;i++)img(`salto${i}`,`assets/personaje/esqueleto/salto${i}.png`);
   img('game-background','assets/Background_all.png');
   for(let i=1;i<=5;i++)img(`colibriFlight${i}`,`assets/colibri/colibri${i}.png`);
   for(let i=1;i<=11;i++)img(`tumba1Frame${i}`,`assets/tumba1/tumbaM${i}.png`);
@@ -99,8 +102,8 @@ function create(){
 
   createAnimations(this);
   player=this.physics.add.sprite(250,GROUND-140,'correr1').setScale(90/256).setDepth(20);
-  // Cuadros de 199×256 con el suelo en la fila 256; cuerpo centrado para que no se mueva al voltear.
-  player.body.setSize(70,236).setOffset(64,20);
+  // Cuadros de 285×272 con el suelo en la última fila; cuerpo centrado en el esqueleto (x≈118).
+  player.body.setSize(70,236).setOffset(83,36);
   player.setCollideWorldBounds(true);
   player.play('idle');
   this.physics.add.collider(player,floor);
@@ -151,10 +154,8 @@ function fitWorldToScreen(){
 function createAnimations(scene){
   if(scene.anims.exists('idle'))return;
   const frames=(name,count)=>Array.from({length:count},(_,i)=>({key:`${name}${i+1}`}));
-  // Quieto y salto usan por ahora una imagen fija de la carrera, hasta tener sus propios cuadros.
-  scene.anims.create({key:'idle',frames:[{key:'correr1'}],frameRate:1,repeat:-1});
+  scene.anims.create({key:'idle',frames:frames('quieto',3),frameRate:4,yoyo:true,repeat:-1});
   scene.anims.create({key:'walk',frames:frames('correr',8),frameRate:14,repeat:-1});
-  scene.anims.create({key:'jump',frames:[{key:'correr1'}],frameRate:1,repeat:0});
   scene.anims.create({key:'colibri-flight',frames:frames('colibriFlight',5),frameRate:12,repeat:-1});
   TRAPS.forEach(t=>scene.anims.create({key:`${t.key}-rise`,frames:frames(`${t.key}Frame`,t.frames),frameRate:5,repeat:-1}));
 }
@@ -255,9 +256,15 @@ function update(){
 }
 
 function updateAvatarAnimation(grounded){
-  const mode=!grounded?'jump':Math.abs(player.body.velocity.x)>1?'walk':'idle';
-  player.anims.play(mode,true);
   player.setFlipX(avatarFacing<0);
+  if(!grounded){
+    // En el aire el cuadro sigue a la velocidad vertical: impulso (1), punto alto (4) y caída (7).
+    player.anims.stop();
+    const vy=Phaser.Math.Clamp(player.body.velocity.y,-540,540);
+    player.setTexture(`salto${1+Math.round((vy+540)/1080*6)}`);
+    return;
+  }
+  player.anims.play(Math.abs(player.body.velocity.x)>1?'walk':'idle',true);
 }
 
 // El colibrí vuela delante de la Calaquita y se acerca al siguiente recuerdo.
