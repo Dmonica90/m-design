@@ -54,6 +54,12 @@ const PlaygroundPage = () => {
             descKey: "challenge8Desc",
             thumbnail: "/thumbnails/zero-trust.png",
             demoLink: "/challenge/zero-trust/index.html"
+        },
+        {
+            titleKey: "challenge9Title",
+            descKey: "challenge9Desc",
+            thumbnail: "/thumbnails/dia-de-muertos.png",
+            demoLink: "/challenge/dia-de-muertos/index.html"
         }
     ];
     return (
