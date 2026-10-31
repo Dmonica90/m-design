@@ -92,8 +92,8 @@ const translations = {
         challenge8Title: 'Zero Trust: The Infiltrator 🕵️‍♀️🔐',
         challenge8Desc: 'A cybersecurity decision game: over three in-game days you investigate four colleagues and decide who is exfiltrating the customer database. Fire the wrong person and you lose a day while the attack keeps running. Rebuilt from Articulate Storyline as a bilingual web app (React + TypeScript).',
 
-        challenge9Title: 'El camino de los pétalos 💀🌼',
-        challenge9Desc: 'A Día de Muertos platformer: walk with the Calaquita and the Hummingbird, collect seven offerings told as calaveritas literarias, then build a personalized altar with your loved one\'s photo and download it as an animated story video. Built with Phaser and Canvas.'
+        challenge9Title: 'The Path of Petals 💀🌼',
+        challenge9Desc: 'A Day of the Dead platformer: walk with Little Miss Skeleton and the Hummingbird, gather seven memories told as rhyming calaveritas, then build a personalized altar with your loved one\'s photo and download it as an animated story video. Playable in English and Spanish. Built with Phaser and Canvas.'
       },
   es: {
     // Header
@@ -189,7 +189,7 @@ const translations = {
         challenge8Desc: 'Un juego de decisiones de ciberseguridad: durante tres días investigas a cuatro colegas y decides quién está extrayendo la base de datos de clientes. Si despides a la persona equivocada pierdes un día y el ataque sigue avanzando. Reconstruido desde Articulate Storyline como una web app bilingüe (React + TypeScript).',
 
         challenge9Title: 'El camino de los pétalos 💀🌼',
-        challenge9Desc: 'Un juego de plataformas de Día de Muertos: recorre el camino con la Calaquita y el Colibrí, reúne siete elementos contados como calaveritas literarias y arma una ofrenda personalizada con la foto de tu ser querido, que puedes descargar como video para historias. Hecho con Phaser y Canvas.'
+        challenge9Desc: 'Un juego de plataformas de Día de Muertos: recorre el camino con la Calaquita y el Colibrí, reúne siete recuerdos contados como calaveritas literarias y arma una ofrenda personalizada con la foto de tu ser querido, que puedes descargar como video animado para historias. Disponible en español e inglés. Hecho con Phaser y Canvas.'
     },
 };
 

@@ -98,7 +98,7 @@ function create(){
   addStreetDecor(this);
 
   createAnimations(this);
-  player=this.physics.add.sprite(250,GROUND-140,'correr1').setScale(95/256).setDepth(20);
+  player=this.physics.add.sprite(250,GROUND-140,'correr1').setScale(90/256).setDepth(20);
   // Cuadros de 199×256 con el suelo en la fila 256; cuerpo centrado para que no se mueva al voltear.
   player.body.setSize(70,236).setOffset(64,20);
   player.setCollideWorldBounds(true);
