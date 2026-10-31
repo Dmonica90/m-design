@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#360543">
+  <title>El camino de los pétalos | Día de Muertos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Delius&family=Kaushan+Script&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser-arcade-physics.min.js"></script>
+  <script src="ofrenda.js"></script>
+  <style>
+    :root{--cempa:#F27A01;--magenta:#C2257A;--purple:#360543;--gold:#F7AB11;--cream:#FFF3DC;--plum:#4a0f5c;--plum2:#6a2a8c;--turq:#3FC1C9;--ink:#2a0838}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -10%,#b0367f 0%,#5a1470 38%,#2a0438 75%,#1a0224 100%) fixed;color:var(--cream);font-family:Nunito,sans-serif;overflow-x:hidden}
+    button,input{font:inherit}button{cursor:pointer} .topbar{height:72px;padding:0 clamp(16px,4vw,54px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f7ab1140;background:#2a0438cc;backdrop-filter:blur(6px);position:relative;z-index:14}
+    .brand{font:clamp(18px,3vw,26px) Delius,cursive;color:var(--gold)}.brand small{display:block;font:800 11px Nunito,sans-serif;color:#ffb3d4;letter-spacing:.12em;text-transform:uppercase}.creator-credit{position:fixed;right:15px;bottom:8px;z-index:32;color:#ffffff99;font:12px Arial,sans-serif;pointer-events:none;text-shadow:1px 1px 2px #180820}
+    .audio{border:2px solid var(--gold);border-radius:50%;background:var(--magenta);width:44px;height:44px;padding:7px;box-shadow:0 3px 0 #7a1250}.audio img{width:100%;height:100%;object-fit:contain;display:block}
+    main{width:min(1120px,96vw);margin:auto;padding:18px 0 26px}.hud{position:absolute;z-index:11;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));display:flex;flex-direction:column;gap:4px;background:#360543b3;border:1px solid #f7ab1144;border-radius:12px;padding:7px 11px;pointer-events:none}.progress{display:flex;gap:4px}
+    #game-container{width:100%;height:min(55vw,440px);min-height:290px;border:3px solid var(--gold);border-radius:22px;overflow:hidden;box-shadow:0 0 0 6px #c2257a55,0 18px 50px #12011a99;background:var(--purple);position:relative}#game-container canvas{display:block}
+    .game-hint{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:10px 14px;border-radius:14px;background:#36054399;border:1px solid #f7ab1133;color:#ffe9d2;font-size:13px;line-height:1.45}.game-hint strong{color:var(--gold)}.keyboard-hint{display:inline}
+    .mobile-controls{position:absolute;z-index:12;inset:0;display:none;align-items:flex-end;justify-content:space-between;padding:0 max(16px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));pointer-events:none}.direction-controls{display:flex;gap:10px}.touch-control{width:50px;height:50px;opacity:.9;padding:0;border:0;border-radius:50%;background:transparent;pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;filter:drop-shadow(0 4px 5px #1a022499);transition:transform .1s}.touch-control img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}.touch-control:active{transform:scale(.9)}
+    .earned-strip{display:flex;align-items:center;gap:4px;min-height:30px;flex-wrap:wrap}.earned-label{font-size:10px;color:#ffd6e8;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.earned-item{width:28px;height:28px;display:grid;place-items:center;opacity:.28;filter:grayscale(1);transition:.35s}.earned-item img{width:100%;height:100%;object-fit:contain}.earned-item.won{opacity:1;filter:drop-shadow(0 0 6px #f7ab11aa);transform:scale(1.08)}
+    .game-btn,.primary{border:0;border-radius:999px;padding:12px 22px;background:linear-gradient(135deg,var(--gold),var(--cempa));color:var(--purple);font-weight:900;box-shadow:0 5px 0 #a8460a;letter-spacing:.02em}.game-btn:active,.primary:active{transform:translateY(2px);box-shadow:0 3px 0 #a8460a}
+    .modal{position:fixed;inset:0;z-index:40;background:#1a0224d9;display:none;align-items:center;justify-content:center;padding:16px}.modal.open{display:flex}.dialog{position:relative;width:min(780px,96vw);max-height:94vh;max-height:94dvh;overflow:auto;background:linear-gradient(160deg,#fff8e8,#ffe2c2);color:var(--ink);border:5px solid var(--cempa);border-radius:25px;padding:clamp(18px,4vw,32px);box-shadow:0 0 0 4px var(--magenta),0 20px 80px #0d0112}.close{position:absolute;right:14px;top:10px;border:0;background:transparent;font-size:30px;color:var(--magenta)}.dialog .field label{color:var(--purple)}.phrase,.frame-opt{color:var(--ink)}.dialog .phrases .phrase,.dialog .frame-choice .frame-opt{color:var(--ink)}.guide{display:flex;gap:16px;align-items:center;margin-bottom:14px}.bird{width:78px;flex:none;animation:bob 1.8s infinite;filter:drop-shadow(0 4px 3px #c2257a55)}@keyframes bob{50%{transform:translateY(-6px) rotate(4deg)}}.eyebrow{margin:0;color:var(--magenta);font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.dialog h2{margin:2px 0 8px;font:clamp(24px,4vw,34px) Delius,cursive;color:var(--purple)}.story{font-size:16px;line-height:1.65;margin:8px 0 18px;white-space:pre-line}.story-body{margin:10px 0 18px;padding:clamp(14px,3vw,22px);border:1px solid #f7ab1177;border-radius:16px;background:linear-gradient(#210a34d9,#260948df),url('assets/Background_all.png') center/cover;color:var(--cream)}.story-body .story{margin:0;color:var(--cream)}.formrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-weight:900;font-size:12px;margin:8px 0 5px;color:var(--purple)}.field input[type=text]{width:100%;border:2px solid #f2b37a;border-radius:10px;padding:10px;background:white;color:var(--ink)}.field input[type=file]{max-width:100%;font-size:12px}.phrases{display:grid;gap:7px;margin:8px 0 14px}.phrase{display:flex;align-items:flex-start;gap:8px;background:#fffdf5;border:1px solid #f2c79a;border-radius:11px;padding:9px;font-size:13px}.phrase input{accent-color:var(--magenta);margin-top:3px}.dialog-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}.secondary{border:2px solid var(--magenta);background:var(--cream);color:var(--purple);border-radius:999px;padding:10px 17px;font-weight:800}.portrait-toggle{margin:0 0 10px}
+    .frame-choice{display:flex;gap:10px}.frame-opt{flex:1;display:flex!important;align-items:center;gap:8px;margin:0!important;padding:8px;border:2px solid #f2c79a;border-radius:12px;background:#fffdf5;cursor:pointer}.frame-opt img{width:44px;height:44px;object-fit:contain}.frame-opt input{accent-color:var(--magenta)}.frame-opt:has(input:checked){border-color:var(--magenta);background:#ffe9f3}
+    #altar-stage{display:none}.altar-layout{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(18px,4vw,48px);align-items:center;margin:18px auto}.altar-copy{max-width:440px}.altar-title{color:var(--gold);font:clamp(30px,5vw,46px) Delius,cursive;margin:0 0 10px}.altar-dedication{color:#ffe4c2;line-height:1.6;margin:0 0 14px;font-style:italic}.altar-cta{color:#ffd6e8;font-size:14px;line-height:1.55;margin:0 0 18px;padding:12px 14px;border-radius:14px;background:#36054399;border:1px solid #f7ab1144}.altar-cta strong{color:var(--gold)}.altar-label{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#ffb3d4;margin:0 0 8px}.style-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}.style-chip{display:grid;place-items:center;width:42px;height:42px;padding:0;border:2px solid #f7ab1155;background:#36054399;border-radius:50%}.style-chip i{width:22px;height:22px;border-radius:50%;border:2px solid var(--cream)}.style-chip.active{border-color:var(--gold);background:var(--magenta);box-shadow:0 0 0 3px #f7ab1144}.altar-buttons{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}.icon-action{display:grid;place-items:center;width:48px;height:48px;padding:11px;border:2px solid var(--gold);border-radius:50%;background:#4a0f5c;color:var(--cream);box-shadow:0 3px 0 #7a1250}.icon-action svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.icon-action.primary{background:linear-gradient(135deg,var(--gold),var(--cempa));color:var(--purple);border:0}.altar-buttons button:disabled{opacity:.55;cursor:default}.ofrenda-canvas{display:block;height:min(82vh,780px);aspect-ratio:9/16;width:auto;max-width:92vw;border-radius:22px;border:3px solid var(--gold);box-shadow:0 0 0 6px #c2257a55,0 20px 70px #0d0112;background:var(--purple)}.credits{color:#ffd6e8;font-size:12px}.photo-dialog{width:min(520px,96vw)}.extra-preview{display:block;max-width:100%;max-height:200px;margin:12px auto;border-radius:12px;border:3px solid var(--gold)}
+    @media(max-width:860px){.altar-layout{grid-template-columns:minmax(0,1fr) minmax(0,.95fr);align-items:start;gap:clamp(8px,2vw,16px);margin:10px auto;text-align:left}.altar-copy{order:0;width:auto;max-width:none}.altar-title{font-size:clamp(20px,3.8vw,32px)}.altar-dedication,.altar-cta{font-size:clamp(11px,1.7vw,14px);line-height:1.45}.style-chips,.altar-buttons{justify-content:flex-start;gap:6px}.style-chip{width:36px;height:36px}.style-chip i{width:20px;height:20px}.icon-action{width:40px;height:40px;padding:9px}.ofrenda-canvas{height:auto;width:min(43vw,calc((100dvh - 40px)*9/16));max-width:100%;margin:0 auto}.credits{font-size:10px}}
+    #pantalla-inicio{position:fixed;inset:0;z-index:30;background:linear-gradient(90deg,#200936bd 0%,#2009367a 45%,#20093600 78%),url('assets/Background_portada.png') center/cover no-repeat,var(--purple);display:flex;align-items:center;justify-content:flex-start;padding:clamp(24px,8vw,120px);text-align:left;overflow:auto}.intro-card{width:min(720px,58vw);max-width:none;background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;text-align:left}.intro-card h2{font:clamp(32px,6vw,64px) Delius,cursive;color:var(--gold);margin:0 0 14px;text-shadow:0 3px 12px #160725}.intro-card p{max-width:650px;line-height:1.6;color:#fff1dc;text-shadow:0 2px 8px #160725}.intro-art{display:none}.intro-controls{font-size:13px;color:#ffe2ed}.rotate-tip{display:none;font-weight:800;color:var(--gold)!important}
+    @media(max-width:760px){#pantalla-inicio{padding:24px;background-position:60% center}.intro-card{width:min(100%,560px)}.intro-card p{font-size:14px}.intro-controls{font-size:12px}}
+    #rotate-screen{display:none;position:fixed;inset:0;z-index:35;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center;background:linear-gradient(#36054399,#2a0438ee),url('assets/Background.png') center/cover,var(--purple)}#rotate-screen img{width:min(220px,60vw);animation:bob 1.8s ease-in-out infinite}#rotate-screen h2{font:28px Delius,cursive;color:var(--gold);margin:0}#rotate-screen p{margin:0;color:#ffe8dc;max-width:300px;line-height:1.5}    body.playing{height:100dvh;overflow:hidden}
+    body.playing .topbar{position:fixed;top:max(8px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));left:auto;height:auto;padding:0;border:0;background:none;backdrop-filter:none;z-index:14}
+    body.playing .brand{display:none}
+    body.playing .audio{width:42px;height:42px;padding:6px}
+    body.playing #journey-stage{position:fixed;inset:0;width:100vw;height:100dvh;padding:0;margin:0}
+    body.playing #game-container{position:fixed;inset:0;width:100vw;height:100dvh;min-height:0;border:0;border-radius:0;box-shadow:none;z-index:10}
+    body.playing #game-container .hud{left:max(10px,env(safe-area-inset-left));right:auto}
+    body.playing .game-hint{display:none}
+    body.playing .mobile-controls{padding-bottom:max(34px,env(safe-area-inset-bottom))}
+    @media(max-width:760px),(hover:none){.formrow{grid-template-columns:1fr}.mobile-controls{display:flex}#game-container{height:58vw;min-height:280px}.keyboard-hint{display:none}.game-hint{font-size:12px}}
+    @media(hover:none) and (orientation:portrait){body.playing #rotate-screen{display:flex}.rotate-tip{display:block}}
+    /* Móvil en horizontal: el juego ocupa toda la pantalla. */
+    @media(hover:none) and (orientation:landscape){
+      body.playing{overflow:hidden;height:100dvh}
+      body.playing .brand{display:none}
+      body.playing .earned-item{width:22px;height:22px}
+      body.playing .touch-control{width:58px;height:58px}
+      .dialog{padding:16px 20px}.story{font-size:14px;margin:4px 0 12px}.bird{width:56px}
+    }
+    /* Botones adornados: píldora morada con mandala, cempasúchil y letra manuscrita. */
+    .game-btn,.primary:not(.icon-action){position:relative;border:0;border-radius:18px;min-height:52px;margin-left:24px;padding:10px 28px 12px 62px;background:linear-gradient(110deg,#3d1590e8,#12053ae8),url('assets/Background_all.png') center/cover;color:#fff;font:400 22px 'Kaushan Script',cursive;letter-spacing:.01em;box-shadow:0 6px 18px #12043a99,inset 0 0 0 1px #ffffff22;transition:transform .15s,box-shadow .15s}
+    .game-btn::before,.primary:not(.icon-action)::before{content:'';position:absolute;left:-26px;top:50%;width:78px;height:78px;transform:translateY(-50%);background:url('assets/1x/Flor.png') center/contain no-repeat;filter:drop-shadow(0 0 10px #f27a0199);transition:transform .35s}
+    .game-btn:hover,.primary:not(.icon-action):hover{transform:translateY(-2px);box-shadow:0 10px 24px #12043aaa,0 0 0 2px #f7ab1155}
+    .game-btn:hover::before,.primary:not(.icon-action):hover::before{transform:translateY(-50%) rotate(14deg)}
+    .game-btn:active,.primary:not(.icon-action):active{transform:translateY(1px);box-shadow:0 4px 12px #12043a99}
+    .primary:disabled{opacity:.5;cursor:default}
+    .secondary{border:1.5px solid #f7ab11aa;border-radius:18px;padding:10px 18px;background:linear-gradient(110deg,#3d1590e0,#12053ae0),url('assets/Background_all.png') center/cover;color:var(--cream);font-weight:800;box-shadow:0 4px 12px #12043a66}
+    /* Iconos redondos: círculo morado con aro dorado. */
+    .audio,.icon-action,.icon-action.primary,.close,.style-chip{position:relative;border:2px solid var(--gold);background:radial-gradient(circle at 50% 30%,#5321a8d9,#14053af0),url('assets/Background_all.png') center/cover;color:#fff;box-shadow:0 4px 12px #12043a99}
+    .audio::after,.icon-action.primary::after{content:'';position:absolute;right:-9px;bottom:-9px;width:24px;height:24px;background:url('assets/1x/Flor.png') center/contain no-repeat;filter:drop-shadow(0 0 4px #f27a01aa);pointer-events:none}
+    .icon-action.recording{animation:grabando 1s ease-in-out infinite;opacity:1}.icon-action.recording::before{content:attr(data-count);position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:1px 7px;border-radius:999px;background:var(--magenta);color:#fff;font:900 11px Nunito,sans-serif}@keyframes grabando{50%{box-shadow:0 0 0 6px #c2257a66}}
+    .close{position:absolute;display:grid;place-items:center;width:36px;height:36px;top:12px;right:12px;padding:0;border-radius:50%;font-size:22px;line-height:1;z-index:2}
+    .style-chip.active{background:radial-gradient(circle at 50% 30%,#c2257a,#5a0f4a),url('assets/Background_all.png') center/cover}
+    .hud{background:linear-gradient(110deg,#3d1590d9,#12053ad9),url('assets/Background_all.png') center/cover;border:1.5px solid #f7ab1188}
+    /* Controles táctiles: círculo morado con un halo de cempasúchil detrás. */
+    .touch-control{position:relative;display:grid;place-items:center;width:48px;height:48px;opacity:1;filter:drop-shadow(0 4px 6px #12043aaa)}
+    .touch-control::before{content:'';position:absolute;inset:-24%;background:url('assets/1x/Flor.png') center/contain no-repeat}
+    .touch-control::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);background:radial-gradient(circle at 50% 30%,#5321a8,#14053a),url('assets/Background_all.png') center/cover}
+    .touch-control svg{position:relative;z-index:1;width:52%;height:52%;fill:none;stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+    .direction-controls{gap:22px}
+    .mobile-controls{padding-left:max(26px,env(safe-area-inset-left));padding-right:max(26px,env(safe-area-inset-right))}
+    @media(hover:none) and (orientation:landscape){body.playing .touch-control{width:54px;height:54px}}
+    /* Ventanas de historia en morado, con un toque de cempasúchil en la esquina. */
+    .dialog{background:radial-gradient(circle at 0% 0%,#f27a0166,transparent 42%),radial-gradient(circle at 100% 100%,#c2257a55,transparent 45%),linear-gradient(160deg,#3d1590f5,#1a0533f7),url('assets/Background_all.png') center/cover;color:var(--cream);border:3px solid var(--gold);box-shadow:0 0 0 4px #c2257a99,0 20px 80px #0d0112}
+    .dialog h2{color:var(--gold)}.eyebrow{color:#ffa9d1}
+    .dialog .field label{color:var(--cream)}
+    .story-body{border-color:#f7ab1155;background:linear-gradient(#14053acc,#24084acc)}
+    .dialog .phrases .phrase,.dialog .frame-choice .frame-opt{background:#ffffff14;border-color:#f7ab1155;color:var(--cream)}
+    .frame-opt:has(input:checked){background:#c2257a66;border-color:var(--gold)}
+    .field input[type=text]{border-color:#f7ab1188}
+    .field input[type=file]{color:var(--cream)}
+    /* Página final sobre la portada ilustrada. */
+    body.altar{background:linear-gradient(#20093699,#200936d9),url('assets/Background_portada.png') center/cover fixed,var(--purple)}
+    body.altar .topbar{background:#20093699}
+    /* Las flechas siempre visibles mientras se juega. */
+    body.playing .mobile-controls{display:flex}
+    /* En computadora el juego va en un recuadro centrado sobre la portada, no a pantalla completa. */
+    @media(hover:hover) and (pointer:fine){
+      body.playing #journey-stage{background:linear-gradient(#20093666,#200936b3),url('assets/Background_portada.png') center/cover,var(--purple)}
+      body.playing #game-container{inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,calc((100dvh - 90px)*2.1),1400px);height:auto;aspect-ratio:2.1;border:3px solid var(--gold);border-radius:22px;box-shadow:0 0 0 6px #c2257a55,0 24px 70px #0d0112}
+    }
+    /* Imagen del objeto acoplada al verso: foto a la izquierda, calaverita a la derecha. */
+    .story-body{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(14px,3vw,24px);align-items:stretch;padding:clamp(10px,2vw,14px)}
+    .step-art{margin:0;align-self:center;aspect-ratio:4/3;border-radius:12px;overflow:hidden;border:2px solid #f7ab1188;box-shadow:0 6px 18px #0d011299;background:#14053a}
+    .step-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+    .story-body .story{align-self:center;padding:6px 6px 6px 0}
+    @media(max-width:560px){.story-body{grid-template-columns:1fr}.step-art{aspect-ratio:16/9}.story-body .story{padding:0 4px 4px}}
+    @media(hover:none) and (orientation:landscape){.story{font-size:13px;line-height:1.5}}
+    /* Página final en celular horizontal: barra compacta, texto con scroll y ofrenda a todo lo alto. */
+    @media(orientation:landscape) and (max-height:560px){
+      body.altar .topbar{height:46px}
+      body.altar .brand{font-size:17px}body.altar .brand small{display:none}
+      body.altar .audio{width:36px;height:36px;padding:5px}
+      body.altar #altar-stage{width:100vw;padding:0 max(14px,env(safe-area-inset-right)) 0 max(14px,env(safe-area-inset-left))}
+      body.altar .altar-layout{grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:18px;margin:0;height:calc(100dvh - 46px);text-align:left}
+      body.altar .altar-copy{order:0;max-width:none;max-height:calc(100dvh - 62px);overflow:auto;padding:4px 6px 4px 0}
+      body.altar .altar-copy{display:flex;flex-direction:column}
+      body.altar .altar-title{order:0}body.altar .altar-label{order:1}body.altar .style-chips{order:2}body.altar .altar-buttons{order:3}body.altar .altar-dedication{order:4}body.altar .altar-cta{order:5}body.altar .credits{order:6}
+      body.altar .creator-credit{left:max(14px,env(safe-area-inset-left));right:auto}
+      body.altar .altar-title{font-size:clamp(20px,3.4vw,28px);margin:0 0 6px}
+      body.altar .altar-dedication{font-size:12px;line-height:1.45;margin:0 0 8px}
+      body.altar .altar-cta{font-size:11.5px;line-height:1.45;padding:8px 10px;margin:0 0 10px}
+      body.altar .altar-label{margin:0 0 6px}
+      body.altar .style-chips{margin-bottom:10px;justify-content:flex-start}
+      body.altar .altar-buttons{justify-content:flex-start;margin:0 0 8px}
+      body.altar .style-chip{width:34px;height:34px}body.altar .icon-action{width:40px;height:40px;padding:9px}
+      body.altar .credits{font-size:10px;margin:0}
+      body.altar .ofrenda-canvas{height:calc(100dvh - 62px);width:auto;max-width:none;margin:0;border-radius:16px}
+    }
+    /* Página final en celular vertical: primero la ofrenda, debajo el texto y los botones. */
+    @media(orientation:portrait) and (max-width:600px){
+      body.altar .altar-layout{grid-template-columns:1fr;justify-items:center;text-align:center;gap:16px;margin:12px auto 24px}
+      body.altar .ofrenda-canvas{order:-1;height:auto;width:min(88vw,calc((100dvh - 150px)*9/16));margin:0 auto}
+      body.altar .altar-copy{max-width:520px}
+      body.altar .altar-title{font-size:26px}
+      body.altar .altar-dedication,body.altar .altar-cta{font-size:13px;text-align:left}
+      body.altar .style-chips,body.altar .altar-buttons{justify-content:center}
+    }
+    /* Ventana de historia en pantallas bajas: más compacta y con el botón siempre a la vista. */
+    @media(orientation:landscape) and (max-height:560px){
+      .modal{padding:8px}
+      .dialog{padding:12px 18px 0;max-height:calc(100dvh - 16px)}
+      .guide{margin-bottom:6px;gap:10px}.bird{width:44px}
+      .dialog h2{font-size:22px;margin:0 0 2px}
+      .story-body{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);margin:6px 0 8px;gap:14px}
+      .step-art{max-height:calc(100dvh - 170px)}
+      .story{font-size:12.5px;line-height:1.4}
+      .dialog-actions{position:sticky;bottom:0;margin:0 -18px;padding:8px 18px 10px;background:linear-gradient(#1a053300,#1a0533f2 35%)}
+      .game-btn,.primary:not(.icon-action){min-height:44px;font-size:19px;padding:8px 22px 9px 56px}
+      .game-btn::before,.primary:not(.icon-action)::before{width:64px;height:64px;left:-20px}
+    }
+    /* Tipografía de textos y títulos: Alegreya, serif cálida con trazo caligráfico. */
+    .brand,.intro-card h2,.altar-title,.dialog h2,#rotate-screen h2{font-family:'Alegreya',Georgia,serif;font-weight:700;letter-spacing:.005em}
+    .story,.altar-dedication,.altar-cta,.intro-card p,.phrase,.credits,#rotate-screen p,.game-hint{font-family:'Alegreya',Georgia,serif}
+    .story{font-size:17.5px;line-height:1.6}
+    .intro-card p{font-size:18px}.intro-controls{font-size:15px}
+    .altar-dedication{font-size:17px}.altar-cta{font-size:15px}
+    @media(orientation:landscape) and (max-height:560px){.story{font-size:14px;line-height:1.4}body.altar .altar-dedication{font-size:13px}body.altar .altar-cta{font-size:12.5px}}
+    .icon-action.ready{animation:listo 1.2s ease-in-out infinite;border-color:#fff}
+    .icon-action.ready::before{content:attr(data-count);position:absolute;top:-14px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:1px 8px;border-radius:999px;background:var(--gold);color:var(--purple);font:900 11px Nunito,sans-serif}
+    @keyframes listo{50%{box-shadow:0 0 0 7px #f7ab1166}}
+  </style>
+</head>
+<body>
+  <div class="creator-credit">Creado con 💜 por Mónica V.</div>
+  <header class="topbar"><div class="brand">El camino de los pétalos<small>Una ofrenda hecha con recuerdos</small></div><button class="audio" id="audio-toggle" onclick="toggleAudio()" aria-label="Activar o silenciar sonido"><img id="audio-icon" src="assets/sound.png" alt=""></button></header>
+  <main id="journey-stage">
+    <div id="game-container"><section class="hud" aria-live="polite"><span class="earned-label" id="earned-count">Recuerdos reunidos · 0/7</span><div class="earned-strip progress" id="progress"></div></section><div class="mobile-controls" aria-label="Controles táctiles"><div class="direction-controls"><button class="touch-control" id="btn-izq" aria-label="Caminar a la izquierda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="touch-control" id="btn-der" aria-label="Caminar a la derecha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div><button class="touch-control" id="btn-salto" aria-label="Saltar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg></button></div></div>
+    <div class="game-hint"><span><strong>Controles:</strong> <span class="keyboard-hint">← → para caminar · ↑ o espacio para saltar · </span>sigue al colibrí, salta las calaveras y toca un recuerdo para conocer su historia.</span></div>
+  </main>
+  <main id="altar-stage">
+    <section class="altar-layout">
+      <div class="altar-copy">
+        <h2 class="altar-title">Donde vive el recuerdo, el amor no termina</h2>
+        <p class="altar-dedication">«Tu ofrenda ha cobrado vida. Has tendido un puente hecho de luz, aromas, memoria y pétalos dorados. Mientras los recuerdes con una sonrisa, mientras pronuncies su nombre y compartas su historia, ellos nunca se habrán ido del todo. Gracias por mantener encendido el corazón de la tradición.»</p>
+        <p class="altar-cta"><strong>🌸 Guarda y comparte tu recuerdo:</strong> personaliza el marco de tu ofrenda, elige tu frase dedicada y descarga tu altar interactivo en formato de historia para compartir con el mundo este homenaje hecho con el alma.</p>
+        <p class="altar-label">Estilo de la ofrenda</p>
+        <div class="style-chips" role="group" aria-label="Estilo de la ofrenda"><button class="style-chip active" data-style="tradicional" aria-label="Estilo tradicional" title="Tradicional" onclick="setAltarStyle('tradicional')"><i style="background:#F7AB11"></i></button><button class="style-chip" data-style="talavera" aria-label="Estilo talavera" title="Talavera" onclick="setAltarStyle('talavera')"><i style="background:#2f8fd0"></i></button><button class="style-chip" data-style="noche" aria-label="Estilo noche de velas" title="Noche de velas" onclick="setAltarStyle('noche')"><i style="background:#6a1a86"></i></button></div>
+        <div class="altar-buttons" role="group" aria-label="Acciones de la ofrenda">
+          <button class="icon-action" id="add-photo-button" aria-label="Agregar más fotos" title="Agregar más fotos" onclick="openPhotoModal()"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/><path d="M18 2v6M15 5h6"/></svg></button>
+          <button class="icon-action primary" id="video-button" aria-label="Descargar video" title="Descargar video" onclick="downloadVideo()"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3zM7 2v3M12 2v3M17 2v3M7 19v3M12 19v3M17 19v3"/></svg></button>
+          <button class="icon-action primary" id="share-button" aria-label="Compartir en Instagram" title="Compartir en Instagram o WhatsApp" onclick="shareOfrenda()"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></button>
+          <button class="icon-action" aria-label="Descargar imagen" title="Descargar imagen" onclick="downloadStory()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5"/><path d="M5 16v4h14v-4"/></svg></button>
+          <button class="icon-action" aria-label="Volver a recorrer" title="Volver a recorrer" onclick="restartJourney()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2.6 6.4"/><path d="M3 4v7h7"/></svg></button>
+        </div>
+        <p class="credits">Cada familia construye su ofrenda a su manera. Esta experiencia celebra algunas de sus muchas tradiciones.</p>
+      </div>
+      <canvas id="ofrenda-canvas" class="ofrenda-canvas" width="1080" height="1920" aria-label="Ofrenda personalizada en formato historia"></canvas>
+    </section>
+  </main>
+  <div id="story-modal" class="modal" role="dialog" aria-modal="true"><section class="dialog"><button class="close" onclick="closeStory()" aria-label="Cerrar">×</button><div class="guide"><img class="bird" src="assets/1x/colibri.png" alt=""><div><p class="eyebrow" id="modal-eyebrow">Un recuerdo te acompaña</p><h2 id="modal-title"></h2></div></div><div class="story-body"><figure class="step-art"><img id="step-art-img" alt=""></figure><p class="story" id="modal-story"></p></div><button class="secondary portrait-toggle" id="portrait-options-toggle" type="button" aria-expanded="false" aria-controls="custom-fields" onclick="togglePortraitOptions()">Agregar foto al marco</button><div id="custom-fields" hidden><div class="formrow"><div class="field"><label for="dedication-input">¿A quién dedicamos la ofrenda?</label><input id="dedication-input" type="text" maxlength="60" placeholder="Escribe un nombre o dedicatoria"></div><div class="field"><label for="photo-input">Sube una foto (opcional)</label><input id="photo-input" type="file" accept="image/*"></div></div><div class="field"><label>Elige el marco</label><div class="frame-choice"><label class="frame-opt"><input type="radio" name="frame" value="persona" checked><img src="assets/1x/portaretrato_persona.png" alt="">Persona</label><label class="frame-opt"><input type="radio" name="frame" value="mascota"><img src="assets/1x/portaretratop_mascota.png" alt="">Mascota</label></div></div><div class="field"><label>Elige una frase para tu ofrenda</label><div class="phrases"><label class="phrase"><input type="radio" name="phrase" value="Tu recuerdo florece en cada pétalo." checked>Tu recuerdo florece en cada pétalo.</label><label class="phrase"><input type="radio" name="phrase" value="Mientras te recordemos, siempre encontrarás el camino a casa.">Mientras te recordemos, siempre encontrarás el camino a casa.</label><label class="phrase"><input type="radio" name="phrase" value="Hoy y siempre, tu luz vive en nosotros.">Hoy y siempre, tu luz vive en nosotros.</label></div><div class="field"><label for="custom-phrase-input">O escribe tu propia frase para la postal</label><input id="custom-phrase-input" type="text" maxlength="140" placeholder="Escribe un mensaje para la postal"></div></div></div><div class="dialog-actions"><button class="primary" id="collect-button" onclick="closeStory()">Continuar el camino</button></div></section></div>
+  <div id="photo-modal" class="modal" role="dialog" aria-modal="true"><section class="dialog photo-dialog"><button class="close" onclick="closePhotoModal()" aria-label="Cerrar">×</button><div class="guide"><img class="bird" src="assets/1x/colibri.png" alt=""><div><p class="eyebrow">Otro recuerdo para la ofrenda</p><h2>Agrega una foto</h2></div></div><div class="field"><label>Elige el marco</label><div class="frame-choice"><label class="frame-opt"><input type="radio" name="extra-frame" value="persona" checked><img src="assets/1x/portaretrato_persona.png" alt="">Persona</label><label class="frame-opt"><input type="radio" name="extra-frame" value="mascota"><img src="assets/1x/portaretratop_mascota.png" alt="">Mascota</label></div></div><div class="field"><label for="extra-name-input">Nombre</label><input id="extra-name-input" type="text" maxlength="40" placeholder="¿Quién aparece en la foto?"></div><div class="field"><label for="extra-photo-input">Sube la foto</label><input id="extra-photo-input" type="file" accept="image/*"></div><img id="extra-preview" class="extra-preview" alt="Vista previa" hidden><div class="dialog-actions"><button class="secondary" onclick="closePhotoModal()">Cancelar</button><button class="primary" id="place-photo-button" onclick="placeExtraPhoto()" disabled>Colocar en la ofrenda</button></div></section></div>
+  <div id="pantalla-inicio"><section class="intro-card"><div class="intro-art"><img src="assets/1x/calaveritra1.png" alt=""><img class="colibri" src="assets/1x/colibri.png" alt=""><img src="assets/1x/Flor.png" alt=""></div><h2>El camino de los pétalos</h2><p>Acompaña a la Calaquita y al Colibrí mientras reúnen los recuerdos para iluminar una ofrenda. Cada objeto guarda una historia y cada paso deja pétalos dorados en el camino.</p><p class="intro-controls">Puedes dedicar este altar a un ser querido, subir su fotografía, elegir un mensaje desde el corazón y llevarte un recuerdo especial listo para compartir.</p><p class="intro-controls rotate-tip">📱 Gira tu teléfono en horizontal para jugar.</p><button class="primary" onclick="iniciarJuego()">Comenzar recorrido</button></section></div>
+  <div id="rotate-screen" role="alert"><img src="assets/giro_movil.png" alt=""><h2>Gira tu teléfono</h2><p>El camino de los pétalos se recorre en horizontal. Voltea tu pantalla para seguir jugando.</p></div>
+  <script src="script.js"></script>
+</body>
+</html>

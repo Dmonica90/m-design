@@ -39,6 +39,11 @@
       "source": "/zero-trust",
       "destination": "/challenge/zero-trust/index.html",
       "permanent": false
+    },
+    {
+      "source": "/dia-de-muertos",
+      "destination": "/challenge/dia-de-muertos/index.html",
+      "permanent": false
     }
   ],
   "rewrites": [
