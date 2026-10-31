@@ -87,7 +87,7 @@ const I18N = {
 
     altarTitle: 'Donde vive el recuerdo, el amor no termina',
     altarText: '«Tu ofrenda ha cobrado vida. Has tendido un puente hecho de luz, aromas, memoria y pétalos dorados. Mientras los recuerdes con una sonrisa, mientras pronuncies su nombre y compartas su historia, ellos nunca se habrán ido del todo. Gracias por mantener encendido el corazón de la tradición.»',
-    altarCta: '<strong>🌸 Guarda y comparte tu recuerdo:</strong> personaliza el marco de tu ofrenda, elige tu frase dedicada y descarga tu altar interactivo en formato de historia para compartir con el mundo este homenaje hecho con el alma.',
+    altarCta: '<strong>🌸 Guarda y comparte tu recuerdo:</strong> personaliza el marco de tu ofrenda, elige tu frase dedicada y descarga tu altar interactivo en formato de historia para compartir con el mundo este homenaje hecho con el alma. <span class="cta-tags">Etiquétanos en Instagram: <a href="https://www.instagram.com/monis_vrl/" target="_blank" rel="noopener">@monis_vrl</a> y <a href="https://www.instagram.com/nandobango/" target="_blank" rel="noopener">@nandobango</a></span>',
     styleLabel: 'Estilo de la ofrenda',
     styleTraditional: 'Tradicional',
     styleTalavera: 'Talavera',
@@ -192,7 +192,7 @@ const I18N = {
 
     altarTitle: 'Where memory lives, love never ends',
     altarText: '“Your offering has come to life. You have built a bridge of light, scents, memory and golden petals. As long as you remember them with a smile, say their name and share their story, they will never be truly gone. Thank you for keeping the heart of the tradition alight.”',
-    altarCta: '<strong>🌸 Save and share your memory:</strong> customize the frame of your offering, choose your dedicated phrase and download your interactive altar as a story to share this heartfelt tribute with the world.',
+    altarCta: '<strong>🌸 Save and share your memory:</strong> customize the frame of your offering, choose your dedicated phrase and download your interactive altar as a story to share this heartfelt tribute with the world. <span class="cta-tags">Tag us on Instagram: <a href="https://www.instagram.com/monis_vrl/" target="_blank" rel="noopener">@monis_vrl</a> and <a href="https://www.instagram.com/nandobango/" target="_blank" rel="noopener">@nandobango</a></span>',
     styleLabel: 'Offering style',
     styleTraditional: 'Traditional',
     styleTalavera: 'Talavera',
