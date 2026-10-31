@@ -295,7 +295,7 @@ function collectItem(_player,item){
   customFields.hidden=true;
   optionsToggle.hidden=step.id!=='foto';
   optionsToggle.setAttribute('aria-expanded','false');
-  optionsToggle.textContent='Agregar foto al marco';
+  optionsToggle.textContent='📷 Agregar foto y nombre';
   document.getElementById('collect-button').textContent=step.id==='foto'?'Guardar y continuar':'Continuar el camino';
   document.getElementById('story-modal').classList.add('open');
   if(sceneRef.cache.audio.exists('pickup'))sceneRef.sound.play('pickup',{volume:.55});
@@ -305,7 +305,8 @@ function togglePortraitOptions(){
   const fields=document.getElementById('custom-fields'),button=document.getElementById('portrait-options-toggle');
   fields.hidden=!fields.hidden;
   button.setAttribute('aria-expanded',String(!fields.hidden));
-  button.textContent=fields.hidden?'Agregar foto al marco':'Ocultar opciones';
+  button.textContent=fields.hidden?'📷 Agregar foto y nombre':'Ocultar opciones';
+  if(!fields.hidden)fields.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function closeStory(){
@@ -346,6 +347,7 @@ async function renderOfrenda(){
   document.querySelectorAll('.style-chip').forEach(chip=>chip.classList.toggle('active',chip.dataset.style===altarStyle));
   const full=extraPhotos.length>=Ofrenda.MAX_EXTRAS,add=document.getElementById('add-photo-button');
   // El botón es un icono: el contador va en el título y la etiqueta accesible.
+  document.getElementById('edit-portrait-button').classList.toggle('attention',!photoData);
   const label=full?'Ofrenda completa':`Agregar más fotos (${extraPhotos.length}/${Ofrenda.MAX_EXTRAS})`;
   add.disabled=full;add.title=label;add.setAttribute('aria-label',label);
 }
@@ -647,6 +649,32 @@ function resizePhoto(file){
     };reader.readAsDataURL(file);
   });
 }
+// Editar el retrato principal desde la página final (nombre, foto, marco y frase).
+let pendingPortrait='';
+function openPortraitModal(){
+  pendingPortrait=photoData;
+  document.getElementById('portrait-name-input').value=dedication==='Alguien especial'?'':dedication;
+  document.getElementById('portrait-photo-input').value='';
+  const preview=document.getElementById('portrait-preview');preview.src=photoData||'';preview.hidden=!photoData;
+  document.querySelector(`input[name="portrait-frame"][value="${frameType}"]`).checked=true;
+  const preset=[...document.querySelectorAll('input[name="portrait-phrase"]')].find(r=>r.value===postcardPhrase);
+  (preset||document.querySelector('input[name="portrait-phrase"]')).checked=true;
+  document.getElementById('portrait-phrase-input').value=preset?'':postcardPhrase;
+  document.getElementById('portrait-modal').classList.add('open');
+}
+function closePortraitModal(){document.getElementById('portrait-modal').classList.remove('open');}
+function savePortrait(){
+  dedication=document.getElementById('portrait-name-input').value.trim()||'Alguien especial';
+  photoData=pendingPortrait;
+  frameType=document.querySelector('input[name="portrait-frame"]:checked').value;
+  postcardPhrase=document.getElementById('portrait-phrase-input').value.trim()||document.querySelector('input[name="portrait-phrase"]:checked').value;
+  closePortraitModal();renderOfrenda();
+}
+document.getElementById('portrait-photo-input').addEventListener('change',async event=>{
+  const file=event.target.files&&event.target.files[0];if(!file)return;
+  pendingPortrait=await resizePhoto(file);
+  const preview=document.getElementById('portrait-preview');preview.src=pendingPortrait;preview.hidden=!pendingPortrait;
+});
 document.getElementById('photo-input').addEventListener('change',async event=>{
   const file=event.target.files&&event.target.files[0];if(!file)return;
   photoData=await resizePhoto(file);syncDedication();
@@ -671,4 +699,4 @@ document.getElementById('extra-photo-input').addEventListener('change',async eve
   const preview=document.getElementById('extra-preview');preview.src=pendingExtra;preview.hidden=!pendingExtra;
   document.getElementById('place-photo-button').disabled=!pendingExtra;
 });
-window.iniciarJuego=iniciarJuego;window.openGuide=openGuide;window.closeGuide=closeGuide;window.openRestart=openRestart;window.closeRestart=closeRestart;window.reiniciarRecorrido=reiniciarRecorrido;window.closeStory=closeStory;window.restartJourney=restartJourney;window.downloadStory=downloadStory;window.downloadVideo=downloadVideo;window.setAltarStyle=setAltarStyle;window.openPhotoModal=openPhotoModal;window.closePhotoModal=closePhotoModal;window.placeExtraPhoto=placeExtraPhoto;window.toggleAudio=toggleAudio;
+window.iniciarJuego=iniciarJuego;window.openPortraitModal=openPortraitModal;window.closePortraitModal=closePortraitModal;window.savePortrait=savePortrait;window.openGuide=openGuide;window.closeGuide=closeGuide;window.openRestart=openRestart;window.closeRestart=closeRestart;window.reiniciarRecorrido=reiniciarRecorrido;window.closeStory=closeStory;window.restartJourney=restartJourney;window.downloadStory=downloadStory;window.downloadVideo=downloadVideo;window.setAltarStyle=setAltarStyle;window.openPhotoModal=openPhotoModal;window.closePhotoModal=closePhotoModal;window.placeExtraPhoto=placeExtraPhoto;window.toggleAudio=toggleAudio;
