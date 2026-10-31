@@ -24,6 +24,7 @@ const I18N = {
     introText2: 'Puedes dedicar este altar a un ser querido, subir su fotografía, elegir un mensaje desde el corazón y llevarte un recuerdo especial listo para compartir.',
     rotateTip: '📱 Gira tu teléfono en horizontal para jugar.',
     start: 'Comenzar recorrido',
+    loading: 'Cargando… {p}%',
     rotateTitle: 'Gira tu teléfono',
     rotateText: 'El camino de los pétalos se recorre en horizontal. Voltea tu pantalla para seguir jugando.',
 
@@ -129,6 +130,7 @@ const I18N = {
     introText2: 'You can dedicate this altar to a loved one, upload their photo, choose a message from the heart and take home a special keepsake, ready to share.',
     rotateTip: '📱 Turn your phone sideways to play.',
     start: 'Start the journey',
+    loading: 'Loading… {p}%',
     rotateTitle: 'Turn your phone',
     rotateText: 'The Path of Petals is played in landscape. Turn your screen to keep playing.',
 

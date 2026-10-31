@@ -319,5 +319,6 @@
     });
   }
 
-  window.Ofrenda = { build, drawFrame, record, toBlob, LOOP, STYLES, MAX_EXTRAS: SLOTS.length };
+  // warm(): descarga las imágenes de la ofrenda en segundo plano mientras se juega.
+  window.Ofrenda = { warm: loadAll, build, drawFrame, record, toBlob, LOOP, STYLES, MAX_EXTRAS: SLOTS.length };
 })();

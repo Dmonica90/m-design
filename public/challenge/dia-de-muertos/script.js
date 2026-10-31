@@ -38,14 +38,18 @@ let player, cursors, items, sceneRef, guide, guideTrail;
 let altarStyle='tradicional', renderToken=0, pendingExtra='', ofrendaScene=null, ofrendaRaf=0;
 let leftDown=false, rightDown=false, jumpDown=false, jumpReleased=true;
 let audioMuted=false;
-// Música de fondo: assets/sounds/musica.mp3 en un <audio> (funciona también abierto como archivo).
-const bgMusic=new Audio('assets/sounds/musica.mp3');bgMusic.loop=true;bgMusic.volume=.35;bgMusic.preload='auto';
+// Música de fondo en un <audio> (funciona también abierto como archivo). Versión AAC ligera;
+// no se descarga hasta que empieza el juego para no competir con las imágenes.
+const bgMusic=new Audio('assets/sounds/musica.m4a');bgMusic.loop=true;bgMusic.volume=.35;bgMusic.preload='none';
 let nextTrailAt=0, hurtUntil=0, trail=[];
 // Ancho visible del mundo: se adapta a la pantalla para llenarla sin recortar.
 let viewW=W, gameBackground=null, fallingPetals=null;
 // El juego se dibuja a más resolución (zoom de cámara) para que no se vea pixeleado.
 let zoom=1;
-const BAKE_RES=Math.min(2,Math.max(1.5,window.devicePixelRatio||1));
+// En celulares se usa menos resolución y zoom para no agotar la memoria de video.
+const isTouch=matchMedia('(hover: none)').matches;
+const BAKE_RES=isTouch?1.5:Math.min(2,Math.max(1.5,window.devicePixelRatio||1));
+const MAX_ZOOM=isTouch?2:2.5;
 let avatarFacing=1;
 const isFile=location.protocol==='file:';
 const touchQuery=matchMedia('(hover: none)'), portraitQuery=matchMedia('(orientation: portrait)');
@@ -66,6 +70,7 @@ const game = new Phaser.Game(config);
 
 function preload(){
   const img=(key,path)=>this.load.image(key,encodeURI(path));
+  this.load.on('progress',setLoading);this.load.on('complete',()=>setLoading(1));
   // Esqueleto: cuadros recortados y reducidos desde assets/personaje/walk/Skeleton 0N.png.
   // Esqueleto: cuadros de walk/, stay/ y jump/ recortados con la misma caja (285×272, suelo abajo).
   for(let i=1;i<=8;i++)img(`correr${i}`,`assets/personaje/esqueleto/correr${i}.png`);
@@ -126,7 +131,8 @@ function create(){
   cursors=this.input.keyboard.createCursorKeys();
   createMobileControls();
   refreshItemHighlights();
-  this.scene.pause();
+  // Si ya se pulsó "Comenzar" mientras cargaba, el juego sigue sin pausa.
+  if(!document.body.classList.contains('playing')||document.querySelector('.modal.open')||needsRotate())this.scene.pause();
   renderProgress();
   fitWorldToScreen();
 }
@@ -140,7 +146,7 @@ function fitWorldToScreen(){
   const box=document.getElementById('game-container').getBoundingClientRect();
   if(!box.width||!box.height)return;
   const nextW=Phaser.Math.Clamp(Math.round(H*box.width/box.height),680,W);
-  const nextZoom=Phaser.Math.Clamp(Math.round(box.height*(window.devicePixelRatio||1)/H*4)/4,1,2.5);
+  const nextZoom=Phaser.Math.Clamp(Math.round(box.height*(window.devicePixelRatio||1)/H*4)/4,1,MAX_ZOOM);
   const gw=Math.round(nextW*nextZoom),gh=Math.round(H*nextZoom);
   viewW=nextW;zoom=nextZoom;
   if(gw!==game.scale.gameSize.width||gh!==game.scale.gameSize.height)game.scale.setGameSize(gw,gh);
@@ -163,7 +169,9 @@ function createAnimations(scene){
 function addTraps(scene){
   TRAP_X.forEach((x,i)=>{
     const t=TRAPS[i%2],s=t.scale;
-    const sprite=scene.add.sprite(x,GROUND+2,`${t.key}Frame1`).setOrigin(.5,t.bottom/512).setScale(s).setDepth(12);
+    // Las medidas de TRAPS están en píxeles de un cuadro de 512; se ajusta si el PNG es más chico.
+    const frameScale=512/scene.textures.get(`${t.key}Frame1`).getSourceImage().width;
+    const sprite=scene.add.sprite(x,GROUND+2,`${t.key}Frame1`).setOrigin(.5,t.bottom/512).setScale(s*frameScale).setDepth(12);
     sprite.play(`${t.key}-rise`);
     const boxH=(t.bottom-t.boxTop)*s,skelTop=GROUND-(t.bottom-t.top)*s;
     const box=scene.add.zone(x,GROUND-boxH/2,t.boxW*s,boxH);
@@ -226,13 +234,13 @@ function addStreetDecor(scene){
       scene.add.image(x,GROUND+3,key).setOrigin(.5,1).setScale(30/scene.textures.get(key).getSourceImage().height).setDepth(7);
       scene.tweens.add({targets:glow,alpha:{from:.55,to:1},scale:{from:1.15,to:1.4},duration:600+rand()*500,yoyo:true,repeat:-1});
     }else if(r<.5){
-      scene.add.image(x,GROUND+4,'florero').setOrigin(.5,1).setScale(64/3654).setDepth(7);
+      scene.add.image(x,GROUND+4,'florero').setOrigin(.5,1).setScale(64/scene.textures.get('florero').getSourceImage().height).setDepth(7);
     }else if(r<.8){
       const n=1+Math.floor(rand()*3);
-      for(let k=0;k<n;k++)scene.add.image(x+k*22-(n-1)*11,GROUND+6,'flor').setOrigin(.5,1).setScale((26+rand()*14)/478).setDepth(7);
+      for(let k=0;k<n;k++)scene.add.image(x+k*22-(n-1)*11,GROUND+6,'flor').setOrigin(.5,1).setScale((26+rand()*14)/scene.textures.get('flor').getSourceImage().width).setDepth(7);
     }else{
       const key=`calav${1+Math.floor(rand()*6)}`;
-      scene.add.image(x,GROUND+4,key).setOrigin(.5,1).setScale(30/570).setDepth(7);
+      scene.add.image(x,GROUND+4,key).setOrigin(.5,1).setScale(30/scene.textures.get(key).getSourceImage().height).setDepth(7);
     }
   }
 }
@@ -438,6 +446,15 @@ function openRestart(){pauseForModal();document.getElementById('restart-modal').
 function closeRestart(resume=true){
   document.getElementById('restart-modal').classList.remove('open');
   if(resume)resumeAfterModal();
+}
+// Botón "Comenzar" deshabilitado con porcentaje mientras cargan las imágenes del juego.
+let loadProgress=0;
+function setLoading(p){
+  loadProgress=p;
+  document.querySelectorAll('[data-start-button]').forEach(btn=>{
+    btn.disabled=p<1;btn.textContent=p<1?t('loading',{p:Math.round(p*100)}):t('start');
+  });
+  if(p>=1&&window.Ofrenda&&Ofrenda.warm)setTimeout(()=>Ofrenda.warm(),1500);
 }
 function iniciarJuego(){
   document.getElementById('pantalla-inicio').style.display='none';
@@ -729,11 +746,11 @@ document.getElementById('extra-photo-input').addEventListener('change',async eve
 function setLang(next){
   lang=next;
   try{localStorage.setItem('petalos-lang',lang);}catch(e){}
-  applyI18n();renderProgress();
+  applyI18n();renderProgress();setLoading(loadProgress);
   if(pendingItem)fillStory(pendingItem.stepIndex);
   if(document.getElementById('guide-modal').classList.contains('open'))document.getElementById('guide-start').textContent=guideFromStart?t('letsPlay'):t('keepPlaying');
   if(document.getElementById('altar-stage').style.display==='block')renderOfrenda();
 }
 function toggleLang(){setLang(lang==='es'?'en':'es');}
-applyI18n();
+applyI18n();setLoading(loadProgress);
 window.toggleLang=toggleLang;window.iniciarJuego=iniciarJuego;window.openPortraitModal=openPortraitModal;window.closePortraitModal=closePortraitModal;window.savePortrait=savePortrait;window.openGuide=openGuide;window.closeGuide=closeGuide;window.openRestart=openRestart;window.closeRestart=closeRestart;window.reiniciarRecorrido=reiniciarRecorrido;window.closeStory=closeStory;window.restartJourney=restartJourney;window.downloadStory=downloadStory;window.downloadVideo=downloadVideo;window.setAltarStyle=setAltarStyle;window.openPhotoModal=openPhotoModal;window.closePhotoModal=closePhotoModal;window.placeExtraPhoto=placeExtraPhoto;window.toggleAudio=toggleAudio;
