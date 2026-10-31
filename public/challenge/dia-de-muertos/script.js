@@ -98,7 +98,7 @@ function create(){
   addStreetDecor(this);
 
   createAnimations(this);
-  player=this.physics.add.sprite(250,GROUND-140,'correr1').setScale(.47).setDepth(20);
+  player=this.physics.add.sprite(250,GROUND-140,'correr1').setScale(.38).setDepth(20);
   // Cuadros de 199×256 con el suelo en la fila 256; cuerpo centrado para que no se mueva al voltear.
   player.body.setSize(70,236).setOffset(64,20);
   player.setCollideWorldBounds(true);
@@ -189,7 +189,8 @@ function hitTrap(_player,skel){
 function addItems(scene){
   items=[];
   pasos.forEach((step,i)=>{
-    const y=step.y;
+    // Los recuerdos flotan un poco más arriba para dejar aire sobre el personaje.
+    const y=step.y-28;
     const halo=scene.add.circle(step.x,y,34,PAL.gold,.16).setStrokeStyle(2.5,PAL.gold,.85).setDepth(40);
     const img=scene.add.image(step.x,y,step.sprite).setDepth(41);
     img.setScale((step.id==='foto'?58:50)/Math.max(img.width,img.height));
@@ -199,7 +200,8 @@ function addItems(scene){
       const smoke=scene.add.particles(step.x,y-20,'humo',{lifespan:1800,speedY:{min:-28,max:-14},speedX:{min:-6,max:6},scale:{start:.25,end:.8},alpha:{start:.45,end:0},frequency:180}).setDepth(40);
       parts.push(smoke);
     }
-    const hit=scene.add.zone(step.x,y,64,90);
+    // La zona baja hasta la altura del personaje, así se siguen tomando al caminar.
+    const hit=scene.add.zone(step.x,y+28,64,110);
     scene.physics.add.existing(hit,true);
     hit.stepIndex=i;hit.parts=parts;items.push(hit);
     scene.tweens.add({targets:[halo,img,number],y:'-=10',duration:1000,yoyo:true,repeat:-1,ease:'Sine.easeInOut'});
