@@ -363,14 +363,53 @@ function showAltar(){
   document.getElementById('altar-stage').style.display='block';
   renderOfrenda();window.scrollTo({top:0,behavior:'smooth'});
 }
-function restartJourney(){
-  document.body.classList.remove('altar');
+function resetProgress(){
   collected.clear();currentStep=0;dedication='Alguien especial';photoData='';extraPhotos=[];frameType='persona';altarStyle='tradicional';pendingItem=null;
   document.getElementById('extra-photo-input').value='';document.getElementById('photo-input').value='';
-  document.getElementById('altar-stage').style.display='none';document.getElementById('journey-stage').style.display='block';
-  document.getElementById('pantalla-inicio').style.display='flex';document.getElementById('dedication-input').value='';
+  document.getElementById('dedication-input').value='';
   document.getElementById('custom-phrase-input').value='';document.querySelector('input[name="phrase"]').checked=true;
-  nextTrailAt=0;game.scene.scenes[0].scene.restart();renderProgress();
+  document.getElementById('story-modal').classList.remove('open');
+  leftDown=false;rightDown=false;jumpDown=false;nextTrailAt=0;renderProgress();
+}
+function restartJourney(){
+  document.body.classList.remove('altar');
+  resetProgress();
+  document.getElementById('altar-stage').style.display='none';document.getElementById('journey-stage').style.display='block';
+  document.getElementById('pantalla-inicio').style.display='flex';
+  game.scene.scenes[0].scene.restart();
+}
+// Reinicio desde el juego: vuelve al inicio del camino y sigue jugando, sin pasar por la portada.
+function reiniciarRecorrido(){
+  closeRestart(false);
+  resetProgress();
+  const scene=game.scene.scenes[0];
+  scene.events.once('create',()=>{if(!needsRotate())scene.scene.resume();fitWorldToScreen();});
+  scene.scene.restart();
+}
+
+// Guía de cómo jugar: se abre al comenzar y desde el botón "?" durante el juego.
+let guideFromStart=false;
+function pauseForModal(){if(sceneRef&&document.body.classList.contains('playing'))sceneRef.scene.pause();}
+function resumeAfterModal(){
+  if(!sceneRef||!document.body.classList.contains('playing')||pendingItem||needsRotate())return;
+  if(document.querySelector('.modal.open'))return;
+  sceneRef.scene.resume();
+}
+function openGuide(){
+  guideFromStart=!document.body.classList.contains('playing');
+  document.getElementById('guide-start').textContent=guideFromStart?'¡A jugar!':'Seguir jugando';
+  pauseForModal();
+  document.getElementById('guide-modal').classList.add('open');
+}
+function closeGuide(){
+  document.getElementById('guide-modal').classList.remove('open');
+  if(guideFromStart){guideFromStart=false;iniciarJuego();}
+  else resumeAfterModal();
+}
+function openRestart(){pauseForModal();document.getElementById('restart-modal').classList.add('open');}
+function closeRestart(resume=true){
+  document.getElementById('restart-modal').classList.remove('open');
+  if(resume)resumeAfterModal();
 }
 function iniciarJuego(){
   document.getElementById('pantalla-inicio').style.display='none';
@@ -397,7 +436,7 @@ function syncOrientation(){
   setTimeout(fitWorldToScreen,250);
   if(!sceneRef||!document.body.classList.contains('playing'))return;
   if(needsRotate())sceneRef.scene.pause();
-  else if(!pendingItem)sceneRef.scene.resume();
+  else resumeAfterModal();
 }
 portraitQuery.addEventListener('change',syncOrientation);
 window.addEventListener('resize',fitWorldToScreen);
@@ -632,4 +671,4 @@ document.getElementById('extra-photo-input').addEventListener('change',async eve
   const preview=document.getElementById('extra-preview');preview.src=pendingExtra;preview.hidden=!pendingExtra;
   document.getElementById('place-photo-button').disabled=!pendingExtra;
 });
-window.iniciarJuego=iniciarJuego;window.closeStory=closeStory;window.restartJourney=restartJourney;window.downloadStory=downloadStory;window.downloadVideo=downloadVideo;window.setAltarStyle=setAltarStyle;window.openPhotoModal=openPhotoModal;window.closePhotoModal=closePhotoModal;window.placeExtraPhoto=placeExtraPhoto;window.toggleAudio=toggleAudio;
+window.iniciarJuego=iniciarJuego;window.openGuide=openGuide;window.closeGuide=closeGuide;window.openRestart=openRestart;window.closeRestart=closeRestart;window.reiniciarRecorrido=reiniciarRecorrido;window.closeStory=closeStory;window.restartJourney=restartJourney;window.downloadStory=downloadStory;window.downloadVideo=downloadVideo;window.setAltarStyle=setAltarStyle;window.openPhotoModal=openPhotoModal;window.closePhotoModal=closePhotoModal;window.placeExtraPhoto=placeExtraPhoto;window.toggleAudio=toggleAudio;
