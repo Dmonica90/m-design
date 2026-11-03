@@ -21,10 +21,10 @@ import React from 'react';
               </div>
               <div className="md:w-1/2 bg-gradient-to-br from-sky-100 to-pink-100 p-6 sm:p-8 flex flex-col justify-center items-center">
                 <div className="w-full aspect-square max-w-md bg-slate-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                  <img alt="Monica 'Monick' Vázquez, smiling, with colorful hair and glasses" className="w-full h-full object-cover" src="https://storage.googleapis.com/hostinger-horizons-assets-prod/3913c9f8-cff2-4084-a914-b4e290044ff2/a5961ee60f717235be61454056acd80e.jpg" />
+                  <img alt="Monica 'Monick' Vázquez character sheet, illustrated with blue hair and glasses" className="w-full h-full object-cover" src="/images/portfolio/monica-character-sheet.jpg" />
                 </div>
                 <div className="w-full aspect-video bg-slate-200 rounded-lg flex items-center justify-center">
-                   <img alt="Laptop on a desk, symbolizing eLearning development workspace" className="w-full h-full object-cover rounded-lg" src="https://storage.googleapis.com/hostinger-horizons-assets-prod/3913c9f8-cff2-4084-a914-b4e290044ff2/b4c3f9d14661cdfedc10756ca4f22d11.jpg" />
+                   <img alt="Day One course running on a laptop on a desk" className="w-full h-full object-cover rounded-lg" src="/images/portfolio/dayone-laptop.jpg" />
                 </div>
               </div>
             </div>
