@@ -19,43 +19,30 @@ import React from 'react';
             />
           </div>
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-              className="mb-6"
-            >
+            <div className="mb-6 hero-in" style={{ '--hero-scale': 0.5, animationDelay: '0.2s' }}>
               <img 
                 src={userImageURL} 
                 alt={t('heroName')}
                 className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover shadow-xl border-4 border-white"
               />
-            </motion.div>
-            <motion.h1
-              className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight mb-4 text-primary"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
+            </div>
+            <h1
+              className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight mb-4 text-primary hero-in"
+              style={{ '--hero-y': '-50px' }}
             >
               {t('heroName')}
-            </motion.h1>
-            <motion.p
-              className="text-xl sm:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+            </h1>
+            <p
+              className="text-xl sm:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto hero-in"
+              style={{ '--hero-y': '50px', animationDelay: '0.3s' }}
             >
               {t('heroSubtitle')}
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
+            </p>
+            <div className="hero-in" style={{ '--hero-scale': 0.8, animationDuration: '0.5s', animationDelay: '0.6s' }}>
               <Button size="lg" asChild className="bg-gradient-to-r from-primary to-pink-500 hover:from-primary/90 hover:to-pink-500/90 text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
                 <a href="#contact">{t('heroCta')} <ArrowRight className="ml-2 h-5 w-5" /></a>
               </Button>
-            </motion.div>
+            </div>
           </div>
         </section>
       );
