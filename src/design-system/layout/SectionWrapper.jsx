@@ -37,7 +37,7 @@ const SectionWrapper = ({ children, className, id, title, subtitle, eyebrow, num
 		className={cn('py-20 sm:py-28', className)}
 		initial={{ opacity: 0, y: 50 }}
 		whileInView={{ opacity: 1, y: 0 }}
-		viewport={{ once: true, amount: 0.2 }}
+		viewport={{ once: true, amount: "some" }}
 		transition={{ duration: 0.6, ease: 'easeOut' }}
 	>
 		<Container>

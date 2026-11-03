@@ -10,55 +10,55 @@ const PlaygroundPage = () => {
         {
             titleKey: "challenge1Title",
             descKey: "challenge1Desc",
-            thumbnail: "/thumbnails/dopamine.png",
+            thumbnail: "/thumbnails/dopamine.jpg",
             demoLink: "/challenge/operation-dopamine/story.html" // Ruta larga y segura
         },
         {
             titleKey: "challenge2Title",
             descKey: "challenge2Desc",
-            thumbnail: "/thumbnails/Squad.png",
+            thumbnail: "/thumbnails/Squad.jpg",
             demoLink: "/challenge/meet-the-squad/story.html" // Ruta larga y segura
         },
         {
             titleKey: "challenge3Title",
             descKey: "challenge3Desc",
-            thumbnail: "/thumbnails/Survive.png",
+            thumbnail: "/thumbnails/Survive.jpg",
             demoLink: "/challenge/survive-stakeholder/index.html" // O story.html según tu carpeta original
         },
         {
             titleKey: "challenge4Title",
             descKey: "challenge4Desc",
-            thumbnail: "/thumbnails/slider-accordion.png",
+            thumbnail: "/thumbnails/slider-accordion.jpg",
             demoLink: "/challenge/sliding-accordion/story.html" // Ruta larga y segura
         },
         {
             titleKey: "challenge5Title",
             descKey: "challenge5Desc",
-            thumbnail: "/thumbnails/8m-museo.png",
+            thumbnail: "/thumbnails/8m-museo.jpg",
             demoLink: "/challenge/museo-8m/index.html" // Ruta larga y segura
         },
         {
             titleKey: "challenge6Title",
             descKey: "challenge6Desc",
-            thumbnail: "/thumbnails/mangrove-blur.png",
+            thumbnail: "/thumbnails/mangrove-blur.jpg",
             demoLink: "/challenge/mangrove-blur/story.html" // Ruta larga y segura
         },
         {
             titleKey: "challenge7Title",
             descKey: "challenge7Desc",
-            thumbnail: "/thumbnails/playcraft-assistant.png", 
+            thumbnail: "/thumbnails/playcraft-assistant.jpg", 
             demoLink: "/challenge/playcraft-assistant/story.html" 
         },
         {
             titleKey: "challenge8Title",
             descKey: "challenge8Desc",
-            thumbnail: "/thumbnails/zero-trust.png",
+            thumbnail: "/thumbnails/zero-trust.jpg",
             demoLink: "/challenge/zero-trust/index.html"
         },
         {
             titleKey: "challenge9Title",
             descKey: "challenge9Desc",
-            thumbnail: "/thumbnails/dia-de-muertos.png",
+            thumbnail: "/thumbnails/dia-de-muertos.jpg",
             demoLink: "/challenge/dia-de-muertos/index.html"
         }
     ];
