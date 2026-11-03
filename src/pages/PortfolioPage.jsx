@@ -28,18 +28,18 @@ import React, { useState } from 'react';
       const paragraphStyle = "mb-4 p-4 rounded-lg bg-white/50 backdrop-blur-sm shadow-sm text-slate-700 leading-relaxed";
 
       const whatIDoImages = [
+        { src: "/images/portfolio/start-smart.jpg", alt: "Reto Start Smart: robot guide over a holographic city" },
+        { src: "/images/portfolio/dayone-welcome.jpg", alt: "Day One onboarding course welcome screen with Truck" },
+        { src: "/images/portfolio/feedback-cover.jpg", alt: "Course cover: How to give effective feedback" },
+        { src: "/images/portfolio/feedback-lesson.jpg", alt: "Interactive lesson on the importance of feedback at work" },
+        { src: "/images/portfolio/chat-cover.jpg", alt: "Course cover: Effective written communication in chat" },
+        { src: "/images/portfolio/chat-voice.jpg", alt: "Voice message types explained in a phone mockup" },
+        { src: "/images/portfolio/chat-phone.jpg", alt: "Interactive chat simulation with opening message tips" },
+        { src: "/images/portfolio/detective-briefing.jpg", alt: "Detective-style briefing scene for an incident-response course" },
+        { src: "/images/portfolio/detective-triage.jpg", alt: "Drag-and-drop activity to classify incidents by severity" },
+        { src: "/images/portfolio/clip-nodes.jpg", alt: "Interactive network map activating telecom nodes" },
         { src: "/images/portfolio/achiever.jpg", alt: "Gamification player-type card: The Achiever" },
-        { src: "/images/portfolio/explorer.jpg", alt: "Gamification player-type card: The Explorer" },
-        { src: "/images/portfolio/socializer.jpg", alt: "Gamification player-type card: The Socializer" },
-        { src: "/images/portfolio/killer.jpg", alt: "Gamification player-type card: The Killer" },
         { src: "/images/portfolio/four-keys.jpg", alt: "Infographic: 4 keys to your gamification strategy" },
-        { src: "/images/portfolio/level-up.jpg", alt: "Infographic: 5 master strategies to level up your eLearning" },
-        { src: "/images/portfolio/dayone-cover.jpg", alt: "Day One, a gamified onboarding course starring Truck" },
-        { src: "/images/portfolio/driven-progress.jpg", alt: "Player motivation card: driven by progress and mastery" },
-        { src: "/images/portfolio/driven-curiosity.jpg", alt: "Player motivation card: driven by curiosity" },
-        { src: "/images/portfolio/driven-interaction.jpg", alt: "Player motivation card: driven by interaction and collaboration" },
-        { src: "/images/portfolio/driven-competition.jpg", alt: "Player motivation card: driven by winning and competition" },
-        { src: "/images/portfolio/dayone-results.jpg", alt: "Day One course results: badges and active participation" },
       ];
 
       const userImageURL = "/images/portfolio/monica-avatar.jpg";
